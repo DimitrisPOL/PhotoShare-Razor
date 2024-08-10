@@ -2,9 +2,299 @@
 @model IndexModel
 @{
     ViewData["Title"] = "Home page";
+    ViewData["image_url"] = "http://166764593.winzone58.grserver.gr/Memory-Pic/images/memorypic_logo.jpg";
+    ViewData["cannon_url"] = "http://166764593.winzone58.grserver.gr/Memory-Pic";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+@*<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>*@
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+
+<link href="~/css/slide-show.css" rel="stylesheet" />
+<script src="~/js/site.js"></script>
+
+<script>
+    window.fbAsyncInit = function () {
+        FB.init({
+            appId: '566054317747874',
+            autoLogAppEvents: true,
+            xfbml: true,
+            version: 'v11.0'
+        });
+    };
+
+    function myShare(s) {
+
+        FB.ui({
+            method: 'share',
+            href: s,
+        }, function (response) {
+            if (response && !response.error_message) {
+                alert('Posting completed.');
+            } else {
+                alert('Error while posting.');
+            }
+        });
+    };
+</script>
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script>
+@*<script>
+        if (screen.width >= 768 && screen.width <= 1136) {
+            var ratio = Math.round(screen.width / 13) / 100;
+            document.getElementById("viewport").setAttribute("content", "width=1300, initial-scale=" + ratio);
+        }
+    </script>
+
+    <script type="application/ld+json" class="yoast-schema-graph">
+        {"@@context":"https://schema.org","@@graph":[{"@@type":"WebSite","@@id":"https://www.amcharts.com/#website","url":"https://www.amcharts.com/","name":"amCharts","description":"","potentialAction":[{"@@type":"SearchAction","target":"https://www.amcharts.com/?s={search_term_string}","query-input":"required name=search_term_string"}],"inLanguage":"en-US"},{"@@type":"WebPage","@@id":"https://www.amcharts.com/svg-maps/#webpage","url":"https://www.amcharts.com/svg-maps/","name":"Free SVG Maps - amCharts","isPartOf":{"@@id":"https://www.amcharts.com/#website"},"datePublished":"2016-06-15T11:10:43+00:00","dateModified":"2018-11-19T17:18:06+00:00","breadcrumb":{"@@id":"https://www.amcharts.com/svg-maps/#breadcrumb"},"inLanguage":"en-US","potentialAction":[{"@@type":"ReadAction","target":["https://www.amcharts.com/svg-maps/"]}]},{"@@type":"BreadcrumbList","@@id":"https://www.amcharts.com/svg-maps/#breadcrumb","itemListElement":[{"@@type":"ListItem","position":1,"item":{"@@type":"WebPage","@@id":"https://www.amcharts.com/","url":"https://www.amcharts.com/","name":"Home"}},{"@@type":"ListItem","position":2,"item":{"@@type":"WebPage","@@id":"https://www.amcharts.com/svg-maps/","url":"https://www.amcharts.com/svg-maps/","name":"Free SVG Maps"}}]}]}
+    </script>*@
+
+
+@*<link href="~/css/Map-demo.css" rel="stylesheet" />*@
+
+<link href="~/css/SearchBox.css" rel="stylesheet" />
+
+@*<script type='text/javascript' src='https://cdn.amcharts.com/lib/3/themes/dark.js?ver=20210217-586' id='-lib-3-themes-dark-js-js'></script>*@
+<div id="fb-root"></div>
+<div class="d-flex flex-column bd-highlight mb-3" style="background-color: #faebd7;">
+    <form asp-page="./Index" method="get">
+        <div class="form-actions no-color">
+
+
+            <div class="wrap">
+                <div class="search">
+                    <input type="text" style="font-family:Arial, FontAwesome"  class="searchTerm" name="SearchString" id="txtLocation" value="@Model.NameFilter" placeholder="FIND YOUR PICTURE &#xF002;" />
+                    <input type="submit" class="searchButton" value="Search" />
+                    @*<button type="submit" class="searchButton">
+                            <i class="fa fa-search"></i>
+                        </button>*@
+                </div>
+            </div>
+        </div>
+    </form>
+
+
+    <div class="p-2 bd-highlight">
+        <div class="Card" style="width:100%;">
+            <div class="container-fluid">
+                <div class="row">
+                    @*<div class="Card" style="height: 410px;width:100%;">*@
+                    @*<div class="CardInner" style="font-size:10px;">*@
+                    @*<div class="col-12">*@
+                    @*<div class="SearchBox">*@
+                    @*<div class="Card" style="height: 410px;width:100%;">*@
+                    @*<div class="CardInner" style="font-size:10px;">*@
+                    @*<label>Search for your Picture</label>*@
+                    @*<div class="container">*@
+                    @*<div class="Icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#657789" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search"><circle cx="11" cy="11" r="8" /><line x1="21" y1="21" x2="16.65" y2="16.65" /></svg>
+                        </div>
+                        <div class="InputContainer">
+                            <input placeholder="Location..." />
+                        </div>*@
+
+
+
+                    @*</div>*@
+                    @*</div>*@
+                    @*<div class="container-fluid">
+                        <div class="row">*@
+
+                    <div class="col-sm-6">
+                        @*<div class="places">*@
+
+                        <div class="slideshow-container">
+                            @*@foreach (var loc in Model.Location)
+                                {
+                                    string base64;
+                                    string imgSrc;
+
+                                    if (loc.ProfilePic != null)
+                                    {
+                                        base64 = Convert.ToBase64String(loc.ProfilePic);
+                                        imgSrc = String.Format("data:image/gif;base64,{0}", base64);
+                                    }
+                                    else
+                                    {
+                                        imgSrc = "https://bootdey.com/img/Content/avatar/avatar7.png";
+                                    }
+
+                                    <div class="mySlides">
+                                        <div class="numbertext">1 / 3</div>
+                                        <div class="text-slider"><h2>@loc.Name</h2></div>
+                                        <a asp-page="Index" asp-route-searchString="@loc.Name"><img src="@imgSrc" style="height: 410px;width:100%;"></a>
+
+                                    </div>
+
+                                }*@
+
+                            <div class="mySlides">
+                                <div class="numbertext"></div>
+                                <div class="text-slider"><h2>Φηρα/Fira</h2></div>
+                                <a asp-page="Index" asp-route-searchString="Φυρα"><img src="~/images/fira1.jpg" style="height: 410px;width:100%;"></a>
+
+                            </div>
+                            <div class="mySlides">
+                                <div class="numbertext">1 / 3</div>
+                                <div class="text-slider"><h2>Φηρα/Fira</h2></div>
+                                <a asp-page="Index" asp-route-searchString="Φυρα"><img src="~/images/fira2.jpg" style="height: 410px;width:100%;"></a>
+
+                            </div>
+                            <div class="mySlides">
+                                <div class="numbertext">1 / 3</div>
+                                <div class="text-slider"><h2>Φηρα/Fira</h2></div>
+                                <a asp-page="Index" asp-route-searchString="Φυρα"><img src="~/images/fira3.jpg" style="height: 410px;width:100%;"></a>
+
+                            </div>
+
+                            <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+                            <a class="next" onclick="plusSlides(1)">&#10095;</a>
+                        </div>
+
+                        <div style="text-align:center">
+                            <span class="dot" onclick="currentSlide(1)"></span>
+                            <span class="dot" onclick="currentSlide(2)"></span>
+                            <span class="dot" onclick="currentSlide(3)"></span>
+                        </div>
+                        @*</div>*@
+                    </div>
+
+                    <div class="col-sm-6">
+                        @*<div class="places">*@
+
+                        <div class="slideshow-container">
+                            <div class="mySlides">
+                                <div class="numbertext"></div>
+                                <div class="text-slider"><h2>OIA</h2></div>
+                                <a asp-page="Index" asp-route-searchString="oia"><img src="~/images/oia1.jpg" style="height: 410px;width:100%;"></a>
+
+                            </div>
+                            <div class="mySlides">
+                                <div class="numbertext">2 / 3</div>
+                                <div class="text-slider"><h2>OIA</h2></div>
+                                <a asp-page="Index" asp-route-searchString="oia"><img src="~/images/oia2.jpg" style="height: 410px;width:100%;"></a>
+
+                            </div>
+                            <div class="mySlides">
+                                <div class="numbertext">3 / 3</div>
+                                <div class="text-slider"><h2>OIA</h2></div>
+                                <a asp-page="Index" asp-route-searchString="oia"><img src="~/images/oia3.jpg" style="height: 410px;width:100%;"></a>
+
+                            </div>
+                            @*<div style="margin: 8px; display: inline-block; width:15%;">
+                                    <div style="display:block;">
+
+                                        <a asp-page="Index" asp-route-searchString="@loc.Name">@loc.Name</a>
+                                    </div>
+
+                                    <div style="display: block;">
+
+                                        <a asp-page="Index" asp-route-searchString="@loc.Name">
+                                            <img style="width:40px;height:40px;" src="@imgSrc" class="img-radius" alt="User-Profile-Image">
+                                        </a>
+                                    </div>
+
+                                </div>*@
+
+
+
+
+
+                            <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+                            <a class="next" onclick="plusSlides(1)">&#10095;</a>
+                        </div>
+
+                        <div style="text-align:center">
+                            <span class="dot" onclick="currentSlide(1)"></span>
+                            <span class="dot" onclick="currentSlide(2)"></span>
+                            <span class="dot" onclick="currentSlide(3)"></span>
+                        </div>
+                        @*</div>*@
+                    </div>
+
+                    @*</div>*@
+                    @*</div>*@
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="p-2 bd-highlight">
+
+        <input type="hidden" id="counter" name="counter" value="0">
+        <input type="hidden" id="index" name="index" value="0">
+        @*<input type="hidden" id="search" name="search" value="@Model.">*@
+        @*<div class="images-container">
+            <div class="text-center">
+                <div class="d-flex flex-row bd-highlight mb-3">
+
+                    <div class="p-2 bd-highlight">*@
+        <div id="main-grid" class="d-flex align-content-around flex-wrap">
+            @if(Model.PhotoBlobs != null)
+                @foreach (var photo in Model.PhotoBlobs)
+                {
+                    <div class="main-pic-container">
+                        <a asp-page="./PhotoDetails" asp-route-photoUrl="@photo.Url" asp-route-name="@photo.Name">
+                            <div class="main-pic">
+                                <img class="front-image" src="@photo.Url" />
+
+
+                            </div>
+                        </a>
+                        <div class="main-pic-menu">
+                            @*<div class="fb-share-button"
+                                     data-href="@Model.Url/PhotoDetails?photoUrl=@Html.UrlEncoder.Encode(PhotoShare.Infrastructure.Url.ToString())"
+                                     data-layout="button_count">
+                                </div>*@
+                            <a class="share-ico" href="">
+                                <img onclick='myShare("@Model.Url/PhotoDetails/@Html.UrlEncoder.Encode(photo.Url.ToString())?name=@photo.Name")' src="~/images/facebook-share-button3.png" />
+                            </a>
+                            <a class="download-ico" href="@photo.Url" download>
+                                <img src="~/images/download-icon-red.webp" />
+                            </a>
+                        </div>
+                    </div>
+                }
+
+
+            @*</div>
+                    </div>
+                </div>*@
+        </div>
+    </div>
+
+
 </div>
+
+<script type="text/javascript">
+
+</script>
+
+@*<script>
+    AmCharts.makeChart("chartdiv", {
+        "type": "map",
+        "theme": "dark",
+        "dataProvider": {
+            "mapURL": "https://www.amcharts.com/lib/3/maps/svg/greeceHigh.svg",
+            "getAreasFromMap": true
+        },
+        "areasSettings": {
+            "autoZoom": true,
+            "selectedColor": "#CC0000"
+        }
+    });</script>*@
+
+
+
+
+@*<script>
+    (function (i, s, o, g, r, a, m) {
+        i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+            (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date(); a = s.createElement(o),
+            m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-22221037-1', 'auto', { 'allowLinker': true });
+    ga('send', 'pageview');
+    ga('require', 'linker');
+    ga('linker:autoLink', ['amcharts.cleverbridge.com']);*@

@@ -1,0 +1,15 @@
+﻿@import url(https://fonts.googleapis.com/css?family=Open+Sans);
+
+body {
+    height: 100vh;
+    background-color: #faebd7;
+    background-size: cover;
+    background-position: center;
+    font-family: 'Open Sans', sans-serif;
+    align-items: center;
+}
+
+footer {
+    box-sizing: content-box;
+    background-color: white;
+}

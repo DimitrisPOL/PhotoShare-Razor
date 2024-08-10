@@ -1,6 +1,8 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using PhotoShare.Data;
+using PhotoShare.Infrastructure.Configuration;
+using PhotoShare.Infrastructure.Services;
 
 namespace PhotoShare
 {
@@ -11,6 +13,8 @@ namespace PhotoShare
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
+
+            builder.Services.Configure<ApplicationConfiguration>(builder.Configuration);
             var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
             builder.Services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(connectionString));
@@ -19,6 +23,9 @@ namespace PhotoShare
             builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             builder.Services.AddRazorPages();
+
+            builder.Services.AddSingleton<IBlobStorageManager, BlobStorageManager>();
+            builder.Services.AddSingleton<IEmaiSender, EmailSender>();
 
             var app = builder.Build();
 
