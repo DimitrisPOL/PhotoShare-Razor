@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace PhotoShare.Infrastructure.Models
+namespace PhotoShare.Domain.Aggregates
 {
     public class PhotoBlob
     {

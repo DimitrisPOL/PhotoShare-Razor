@@ -2,11 +2,10 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
-using PhotoShare.Infrastructure.Models;
 using PhotoShare.Data;
-using PhotoShare.Data.Models;
 using PhotoShare.Infrastructure.Configuration;
 using PhotoShare.Infrastructure.Services;
+using PhotoShare.Domain.Aggregates;
 
 namespace PhotoShare.Pages
 {

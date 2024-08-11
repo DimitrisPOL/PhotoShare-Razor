@@ -1,14 +1,9 @@
 ﻿using Azure.Storage.Blobs;
 using Azure.Storage.Blobs.Models;
 using Microsoft.Extensions.Options;
+using PhotoShare.Domain.Aggregates;
 using PhotoShare.Infrastructure.Configuration;
-using PhotoShare.Infrastructure.Models;
-using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
 using UnidecodeSharpFork;
 
 namespace PhotoShare.Infrastructure.Services

@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using PhotoShare.Data.Models;
+using PhotoShare.Domain.Aggregates;
+using PhotoShare.Domain.Values;
 
 namespace PhotoShare.Data
 {

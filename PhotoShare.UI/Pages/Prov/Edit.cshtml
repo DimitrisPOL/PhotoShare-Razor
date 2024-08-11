@@ -1,0 +1,61 @@
+﻿@page
+@model PhotoShare.Pages.Prov.EditModel
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<h1>Edit</h1>
+
+<h4>Province</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Province.ID" />
+            <div class="form-group">
+                <label asp-for="Province.Name" class="control-label"></label>
+                <input asp-for="Province.Name" class="form-control" />
+                <span asp-validation-for="Province.Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Province.TelephonePrefix1" class="control-label"></label>
+                <input asp-for="Province.TelephonePrefix1" class="form-control" />
+                <span asp-validation-for="Province.TelephonePrefix1" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Province.TelephonePrefix2" class="control-label"></label>
+                <input asp-for="Province.TelephonePrefix2" class="form-control" />
+                <span asp-validation-for="Province.TelephonePrefix2" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Province.NumberOfOutposts" class="control-label"></label>
+                <input asp-for="Province.NumberOfOutposts" class="form-control" />
+                <span asp-validation-for="Province.NumberOfOutposts" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Province.NumberOfPictures" class="control-label"></label>
+                <input asp-for="Province.NumberOfPictures" class="form-control" />
+                <span asp-validation-for="Province.NumberOfPictures" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Province.NumberOfPhotographers" class="control-label"></label>
+                <input asp-for="Province.NumberOfPhotographers" class="form-control" />
+                <span asp-validation-for="Province.NumberOfPhotographers" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="./Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
