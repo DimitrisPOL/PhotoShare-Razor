@@ -8,7 +8,7 @@ using PhotoShare.Data;
 
 #nullable disable
 
-namespace PhotoShare.Data.Migrations
+namespace PhotoShare.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
     partial class ApplicationDbContextModelSnapshot : ModelSnapshot

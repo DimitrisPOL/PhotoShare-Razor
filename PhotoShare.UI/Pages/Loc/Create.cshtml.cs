@@ -11,7 +11,7 @@ using UnidecodeSharpFork;
 
 namespace PhotoShare.Pages.Loc
 {
-    [Authorize(Roles = "ADMIN")]
+    [Authorize(Roles = "admin")]
     public class CreateModel : PageModel
     {
         private readonly ApplicationDbContext _context;

@@ -8,7 +8,7 @@ using PhotoShare.Infrastructure.Services;
 namespace PhotoShare.Pages.Loc
 {
     [DisableRequestSizeLimit]
-    [Authorize(Roles = "ADMIN")]
+    [Authorize(Roles = "admin")]
     public class DetailsModel : PageModel
     {
         private readonly PhotoShare.Data.ApplicationDbContext _context;

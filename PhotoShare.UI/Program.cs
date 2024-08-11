@@ -1,8 +1,11 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using PhotoShare.Data;
+using PhotoShare.Extensions;
 using PhotoShare.Infrastructure.Configuration;
+using PhotoShare.Infrastructure.Data.Users;
 using PhotoShare.Infrastructure.Services;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace PhotoShare
 {
@@ -16,12 +19,12 @@ namespace PhotoShare
 
             builder.Services.Configure<ApplicationConfiguration>(builder.Configuration);
             var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
-            builder.Services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(connectionString));
+            builder.Services.AddDbContext<ApplicationDbContext>(options => { options.UseSqlServer(connectionString, b => b.MigrationsAssembly("PhotoShare.Infrastructure")); });
             builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-            builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-                .AddEntityFrameworkStores<ApplicationDbContext>();
+            builder.Services.AddDefaultIdentity<PhotographyUser>(options => options.SignIn.RequireConfirmedAccount = true)
+                          .AddRoles<IdentityRole>()
+                          .AddEntityFrameworkStores<ApplicationDbContext>();
             builder.Services.AddRazorPages();
 
             builder.Services.AddSingleton<IBlobStorageManager, BlobStorageManager>();
@@ -43,6 +46,9 @@ namespace PhotoShare
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+
+            app.EnsureIdentityDbIsCreated();
+            app.SeedIdentityDataAsync();
 
             app.UseRouting();
 

@@ -7,7 +7,7 @@ using PhotoShare.Domain.Aggregates;
 
 namespace PhotoShare.Pages.Loc
 {
-    [Authorize(Roles = "ADMIN")]
+    [Authorize(Roles = "admin")]
     public class IndexModel : PageModel
     {
         private readonly ApplicationDbContext _context;

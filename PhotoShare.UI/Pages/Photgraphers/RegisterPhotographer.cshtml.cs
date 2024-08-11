@@ -21,7 +21,7 @@ using PhotoShare.Infrastructure.Data.Users;
 
 namespace PhotoShare.Areas.Identity.Pages.Photgraphers
 {
-    [Authorize(Roles = "ADMIN")]
+    [Authorize(Roles = "admin")]
     public class RegisterPhotographersModel : PageModel
     {
         private readonly SignInManager<PhotographyUser> _signInManager;

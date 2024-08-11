@@ -12,7 +12,7 @@ using PhotoShare.Domain.Values;
 
 namespace PhotoShare.Pages.Count
 {
-    [Authorize(Roles = "ADMIN")]
+    [Authorize(Roles = "admin")]
     public class IndexModel : PageModel
     {
         private readonly ApplicationDbContext _context;

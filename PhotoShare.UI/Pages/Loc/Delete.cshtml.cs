@@ -12,7 +12,7 @@ using PhotoShare.Domain.Aggregates;
 
 namespace PhotoShare.Pages.Loc
 {
-    [Authorize(Roles = "ADMIN")]
+    [Authorize(Roles = "admin")]
     public class DeleteModel : PageModel
     {
         private readonly ApplicationDbContext _context;

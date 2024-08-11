@@ -8,7 +8,7 @@ using PhotoShare.Domain.Values;
 
 namespace PhotoShare.Pages.PhotographersPage
 {
-    [Authorize(Roles = "ADMIN")]
+    [Authorize(Roles = "admin")]
     public class DeleteModel : PageModel
     {
         private readonly ApplicationDbContext _context;

@@ -14,7 +14,7 @@ using PhotoShare.Infrastructure.Data.Users;
 
 namespace PhotoShare.Pages.PhotographersPage
 {
-    [Authorize(Roles = "ADMIN")]
+    [Authorize(Roles = "admin")]
     public class IndexModel : PageModel
     {
         public List<PhotographyUser> Users;
