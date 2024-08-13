@@ -1,12 +1,15 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using PhotoShare.Data;
-using PhotoShare.Domain.Values;
 
 
-namespace PhotoShare.Pages.PhotographersPage
+namespace PhotoShare.Pages.Location
 {
     [Authorize(Roles = "admin")]
     public class DeleteModel : PageModel
@@ -19,7 +22,7 @@ namespace PhotoShare.Pages.PhotographersPage
         }
 
         [BindProperty]
-        public Domain.Values.Area Area { get; set; }
+        public Domain.Values.Location Location { get; set; }
 
         public async Task<IActionResult> OnGetAsync(string id)
         {
@@ -28,9 +31,9 @@ namespace PhotoShare.Pages.PhotographersPage
                 return NotFound();
             }
 
-            Area = await _context.Areas.FirstOrDefaultAsync(m => m.ID == id);
+            Location = await _context.Locations.FirstOrDefaultAsync(m => m.ID == id);
 
-            if (Area == null)
+            if (Location == null)
             {
                 return NotFound();
             }
@@ -44,11 +47,11 @@ namespace PhotoShare.Pages.PhotographersPage
                 return NotFound();
             }
 
-            Area = await _context.Areas.FindAsync(id);
+            Location = await _context.Locations.FindAsync(id);
 
-            if (Area != null)
+            if (Location != null)
             {
-                _context.Areas.Remove(Area);
+                _context.Locations.Remove(Location);
                 await _context.SaveChangesAsync();
             }
 

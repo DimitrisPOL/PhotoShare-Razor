@@ -1,0 +1,15 @@
+﻿@using PhotoShare.Views.Shared.Components.AdminMenu
+@model AdminMenuViewModel
+@{
+}
+<!-- Sidebar -->
+<div class="bg-light border-right" id="sidebar-wrapper">
+    <div class="sidebar-heading">Start Bootstrap </div>
+    <div class="list-group list-group-flush">
+        <a href="../Country/Index" class="list-group-item list-group-item-action @(Model.focusedItem == typeof(PhotoShare.Pages.Country.CreateModel).Namespace ? "focusedOption" : "")">Countries</a>
+        <a href="../Province/Index" class="list-group-item list-group-item-action @(Model.focusedItem == typeof(PhotoShare.Pages.Province.CreateModel).Namespace ? "focusedOption" : "")">Provinces</a>
+        <a href="../Area/Index" class="list-group-item list-group-item-action @(Model.focusedItem == typeof(PhotoShare.Pages.Area.CreateModel).Namespace ? "focusedOption" : "")">Areas</a>
+        <a href="../Location/Index" class="list-group-item list-group-item-action @(Model.focusedItem == typeof(PhotoShare.Pages.Location.CreateModel).Namespace ? "focusedOption" : "")">Locations</a>
+        <a href="../Pictures/Index" class="list-group-item list-group-item-action @(Model.focusedItem == typeof(PhotoShare.Pages.Pictures.IndexModel).Namespace ? "focusedOption" : "")">Pictures</a>
+    </div>
+</div>

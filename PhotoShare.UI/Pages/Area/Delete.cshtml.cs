@@ -9,19 +9,19 @@ using Microsoft.EntityFrameworkCore;
 using PhotoShare.Data;
 using PhotoShare.Domain.Values;
 
-
-namespace PhotoShare.Pages.PhotographersPage
+namespace PhotoShare.Pages.Area
 {
     [Authorize(Roles = "admin")]
-    public class DetailsModel : PageModel
+    public class DeleteModel : PageModel
     {
         private readonly ApplicationDbContext _context;
 
-        public DetailsModel(ApplicationDbContext context)
+        public DeleteModel(ApplicationDbContext context)
         {
             _context = context;
         }
 
+        [BindProperty]
         public Domain.Values.Area Area { get; set; }
 
         public async Task<IActionResult> OnGetAsync(string id)
@@ -38,6 +38,24 @@ namespace PhotoShare.Pages.PhotographersPage
                 return NotFound();
             }
             return Page();
+        }
+
+        public async Task<IActionResult> OnPostAsync(string id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            Area = await _context.Areas.FindAsync(id);
+
+            if (Area != null)
+            {
+                _context.Areas.Remove(Area);
+                await _context.SaveChangesAsync();
+            }
+
+            return RedirectToPage("./Index");
         }
     }
 }

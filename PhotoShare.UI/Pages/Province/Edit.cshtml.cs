@@ -3,11 +3,12 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using PhotoShare.Data;
+using PhotoShare.Domain.Values;
 
 
-namespace PhotoShare.Pages.PhotographersPage
+namespace PhotoShare.Pages.Province
 {
-    [Authorize(Roles = "admin")]
+    [Authorize]
     public class EditModel : PageModel
     {
         private readonly ApplicationDbContext _context;
@@ -18,7 +19,7 @@ namespace PhotoShare.Pages.PhotographersPage
         }
 
         [BindProperty]
-        public Domain.Values.Area Area { get; set; }
+        public Domain.Values.Province Province { get; set; }
 
         public async Task<IActionResult> OnGetAsync(string id)
         {
@@ -27,9 +28,9 @@ namespace PhotoShare.Pages.PhotographersPage
                 return NotFound();
             }
 
-            Area = await _context.Areas.FirstOrDefaultAsync(m => m.ID == id);
+            Province = await _context.Provinces.FirstOrDefaultAsync(m => m.ID == id);
 
-            if (Area == null)
+            if (Province == null)
             {
                 return NotFound();
             }
@@ -45,7 +46,7 @@ namespace PhotoShare.Pages.PhotographersPage
                 return Page();
             }
 
-            _context.Attach(Area).State = EntityState.Modified;
+            _context.Attach(Province).State = EntityState.Modified;
 
             try
             {
@@ -53,7 +54,7 @@ namespace PhotoShare.Pages.PhotographersPage
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!AreaExists(Area.ID))
+                if (!ProvinceExists(Province.ID))
                 {
                     return NotFound();
                 }
@@ -66,9 +67,9 @@ namespace PhotoShare.Pages.PhotographersPage
             return RedirectToPage("./Index");
         }
 
-        private bool AreaExists(string id)
+        private bool ProvinceExists(string id)
         {
-            return _context.Areas.Any(e => e.ID == id);
+            return _context.Provinces.Any(e => e.ID == id);
         }
     }
 }

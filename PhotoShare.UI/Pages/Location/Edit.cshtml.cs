@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using PhotoShare.Data;
 
 
-namespace PhotoShare.Pages.PhotographersPage
+namespace PhotoShare.Pages.Location
 {
     [Authorize(Roles = "admin")]
     public class EditModel : PageModel
@@ -18,7 +18,7 @@ namespace PhotoShare.Pages.PhotographersPage
         }
 
         [BindProperty]
-        public Domain.Values.Area Area { get; set; }
+        public Domain.Values.Location Location { get; set; }
 
         public async Task<IActionResult> OnGetAsync(string id)
         {
@@ -27,9 +27,9 @@ namespace PhotoShare.Pages.PhotographersPage
                 return NotFound();
             }
 
-            Area = await _context.Areas.FirstOrDefaultAsync(m => m.ID == id);
+            Location = await _context.Locations.FirstOrDefaultAsync(m => m.ID == id);
 
-            if (Area == null)
+            if (Location == null)
             {
                 return NotFound();
             }
@@ -45,7 +45,7 @@ namespace PhotoShare.Pages.PhotographersPage
                 return Page();
             }
 
-            _context.Attach(Area).State = EntityState.Modified;
+            _context.Attach(Location).State = EntityState.Modified;
 
             try
             {
@@ -53,7 +53,7 @@ namespace PhotoShare.Pages.PhotographersPage
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!AreaExists(Area.ID))
+                if (!LocationExists(Location.ID))
                 {
                     return NotFound();
                 }
@@ -66,9 +66,9 @@ namespace PhotoShare.Pages.PhotographersPage
             return RedirectToPage("./Index");
         }
 
-        private bool AreaExists(string id)
+        private bool LocationExists(string id)
         {
-            return _context.Areas.Any(e => e.ID == id);
+            return _context.Locations.Any(e => e.ID == id);
         }
     }
 }

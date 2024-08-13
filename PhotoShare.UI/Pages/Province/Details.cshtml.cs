@@ -10,9 +10,9 @@ using PhotoShare.Data;
 using PhotoShare.Domain.Values;
 
 
-namespace PhotoShare.Pages.PhotographersPage
+namespace PhotoShare.Pages.Province
 {
-    [Authorize(Roles = "admin")]
+    [Authorize]
     public class DetailsModel : PageModel
     {
         private readonly ApplicationDbContext _context;
@@ -22,7 +22,7 @@ namespace PhotoShare.Pages.PhotographersPage
             _context = context;
         }
 
-        public Domain.Values.Area Area { get; set; }
+        public Domain.Values.Province Province { get; set; }
 
         public async Task<IActionResult> OnGetAsync(string id)
         {
@@ -31,9 +31,9 @@ namespace PhotoShare.Pages.PhotographersPage
                 return NotFound();
             }
 
-            Area = await _context.Areas.FirstOrDefaultAsync(m => m.ID == id);
+            Province = await _context.Provinces.FirstOrDefaultAsync(m => m.ID == id);
 
-            if (Area == null)
+            if (Province == null)
             {
                 return NotFound();
             }

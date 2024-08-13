@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using PhotoShare.Domain.Aggregates;
 using PhotoShare.Domain.Values;
 using PhotoShare.Infrastructure.Data.Users;
 using System.Reflection.Emit;

@@ -29,7 +29,7 @@ namespace PhotoShare
 
             builder.Services.AddSingleton<IBlobStorageManager, BlobStorageManager>();
             builder.Services.AddSingleton<IEmaiSender, EmailSender>();
-
+            builder.Services.AddControllersWithViews();
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.

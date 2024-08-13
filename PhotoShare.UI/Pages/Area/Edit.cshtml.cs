@@ -3,9 +3,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using PhotoShare.Data;
+using PhotoShare.Domain.Values;
 
-
-namespace PhotoShare.Pages.PhotographersPage
+namespace PhotoShare.Pages.Area
 {
     [Authorize(Roles = "admin")]
     public class EditModel : PageModel

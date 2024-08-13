@@ -1,11 +1,17 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using PhotoShare.Data;
+using PhotoShare.Domain.Values;
 
 
-namespace PhotoShare.Pages.PhotographersPage
+namespace PhotoShare.Pages.Country
 {
     [Authorize(Roles = "admin")]
     public class EditModel : PageModel
@@ -18,7 +24,7 @@ namespace PhotoShare.Pages.PhotographersPage
         }
 
         [BindProperty]
-        public Domain.Values.Area Area { get; set; }
+        public Domain.Values.Country Country { get; set; }
 
         public async Task<IActionResult> OnGetAsync(string id)
         {
@@ -27,9 +33,9 @@ namespace PhotoShare.Pages.PhotographersPage
                 return NotFound();
             }
 
-            Area = await _context.Areas.FirstOrDefaultAsync(m => m.ID == id);
+            Country = await _context.Countries.FirstOrDefaultAsync(m => m.ID == id);
 
-            if (Area == null)
+            if (Country == null)
             {
                 return NotFound();
             }
@@ -45,7 +51,7 @@ namespace PhotoShare.Pages.PhotographersPage
                 return Page();
             }
 
-            _context.Attach(Area).State = EntityState.Modified;
+            _context.Attach(Country).State = EntityState.Modified;
 
             try
             {
@@ -53,7 +59,7 @@ namespace PhotoShare.Pages.PhotographersPage
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!AreaExists(Area.ID))
+                if (!CountryExists(Country.ID))
                 {
                     return NotFound();
                 }
@@ -66,9 +72,9 @@ namespace PhotoShare.Pages.PhotographersPage
             return RedirectToPage("./Index");
         }
 
-        private bool AreaExists(string id)
+        private bool CountryExists(string id)
         {
-            return _context.Areas.Any(e => e.ID == id);
+            return _context.Countries.Any(e => e.ID == id);
         }
     }
 }

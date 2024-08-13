@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PhotoShare.Domain", "PhotoS
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PhotoShare.Infrastructure", "PhotoShare.Infrastructure\PhotoShare.Infrastructure.csproj", "{84999327-489B-4B5F-A1F9-747C797118A6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PhotoShare.Application", "PhotoShare.Application\PhotoShare.Application.csproj", "{8861B252-D3DE-4BF6-B997-65CF242CC0BA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PhotoShare.Application", "PhotoShare.Application\PhotoShare.Application.csproj", "{8861B252-D3DE-4BF6-B997-65CF242CC0BA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -182,6 +182,10 @@ body {
     width: 100%
 }
 
+.focusedOption {
+    background-color: #69F0AE !important;
+}
+
 @media only screen and (max-width:768px) {
     [class*=front-image] {
         width: 25%

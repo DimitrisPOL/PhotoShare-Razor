@@ -1,0 +1,128 @@
+﻿@page
+@model PhotoShare.Pages.Location.DetailsModel
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+<style>
+    .card {
+        box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+        transition: 0.3s;
+        width: 40%;
+    }
+
+        .card:hover {
+            box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+        }
+
+    .container {
+        padding: 2px 16px;
+    }
+</style>
+
+
+<h1>Details</h1>
+
+<div>
+    <h4>Location</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Location.Name)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Location.Name)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Location.TelephonePrefix1)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Location.TelephonePrefix1)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Location.TelephonePrefix2)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Location.TelephonePrefix2)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Location.NumberOfOutposts)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Location.NumberOfOutposts)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Location.SearchIndex)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Location.SearchIndex)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Location.NumberOfPictures)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Location.NumberOfPictures)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Location.NumberOfPhotographers)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Location.NumberOfPhotographers)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-page="./Edit" asp-route-id="@Model.Location.ID">Edit</a> |
+    <a asp-page="./Index">Back to List</a>
+</div>
+
+<form method="post" asp-page="Details" asp-route-id="@Model.Location.ID" enctype="multipart/form-data">
+    Photos <input type="file" name="photos" multiple="multiple" accept="image/*" />
+    <input type="hidden" asp-for="Name" value="@Model.Location.ID">
+    <br />
+    <input type="submit" value="Upload" />
+    @*@if (Model.FileNames != null && Model.FileNames.Count > 0)
+    {
+        <ul>
+            @foreach (var fileName in Model.FileNames)
+            {
+
+                <li>
+
+                    <div class="card">
+                        <img src="~/images/@fileName" style="width:100%" />
+                        <div class="container">
+                            <h4><b>John Doe</b></h4>
+                            <p>Architect & Engineer</p>
+                        </div>
+                    </div>
+                </li>
+            }
+        </ul>
+    }*@
+</form>
+<div class="d-flex flex-column bd-highlight mb-3" style="background-color: #faebd7;">
+    <div class="p-2 bd-highlight">
+        @*<div class="images-container">
+            <div class="text-center">
+                <div class="d-flex flex-row bd-highlight mb-3">
+
+                    <div class="p-2 bd-highlight">*@
+        <div class="d-flex align-content-around flex-wrap">
+           @if(Model.PhotoBlobs != null)
+            @foreach (var photo in Model.PhotoBlobs)
+            {
+                <div class="card" width="33%" height="300" style="overflow:hidden; margin:2px;">
+                    <img src="@photo.Url"  height="200"/>
+                    <div class="container">
+                        <h4><b>@photo.Name</b></h4>
+                    </div>
+                </div>
+
+            }
+        </div>
+    </div>
+</div>
+
+

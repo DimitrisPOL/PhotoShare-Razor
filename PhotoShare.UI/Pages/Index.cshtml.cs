@@ -13,7 +13,7 @@ namespace PhotoShare.Pages
     {
         private readonly ILogger<IndexModel> _logger;
         private IBlobStorageManager _blobStorageManager;
-        public IList<Location> Location { get; set; }
+        public IList<Domain.Values.Location> Location { get; set; }
         private readonly ApplicationDbContext _context;
         private ApplicationConfiguration Configuration;
         public List<PhotoBlob> PhotoBlobs { get; set; }
@@ -85,7 +85,7 @@ namespace PhotoShare.Pages
 
         public async Task<IActionResult> OnGetNewPictures(string searchString, int skip)
         {
-            Location = new List<Location>();
+            Location = new List<Domain.Values.Location>();
             Location = await _context.Locations.ToListAsync();
 
             if (searchString == null)
