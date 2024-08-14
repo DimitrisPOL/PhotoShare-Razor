@@ -28,6 +28,8 @@ namespace PhotoShare.Pages.Country
         // more details, see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync()
         {
+            Country.ID = Guid.NewGuid().ToString();
+
             if (!ModelState.IsValid)
             {
                 return Page();

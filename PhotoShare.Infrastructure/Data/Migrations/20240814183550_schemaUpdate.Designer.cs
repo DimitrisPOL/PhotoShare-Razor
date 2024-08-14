@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PhotoShare.Data;
 
@@ -11,9 +12,11 @@ using PhotoShare.Data;
 namespace PhotoShare.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240814183550_schemaUpdate")]
+    partial class schemaUpdate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -47,6 +50,15 @@ namespace PhotoShare.Data.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "2652f744-d840-4c18-9ecf-87e84355101f",
+                            ConcurrencyStamp = "2652f744-d840-4c18-9ecf-87e84355101f",
+                            Name = "Admin",
+                            NormalizedName = "ADMIN"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -136,6 +148,13 @@ namespace PhotoShare.Data.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("AspNetUserRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            UserId = "02174cf0–9412–4cfe-afbf-59f706d72cf6",
+                            RoleId = "2652f744-d840-4c18-9ecf-87e84355101f"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
@@ -433,6 +452,30 @@ namespace PhotoShare.Data.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "02174cf0–9412–4cfe-afbf-59f706d72cf6",
+                            AccessFailedCount = 0,
+                            City = "Athens",
+                            ConcurrencyStamp = "8993483f-3132-499c-b0df-8750e7cd30f3",
+                            DOB = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Degree = "Masters",
+                            DisplayToFront = false,
+                            Email = "example@gmail.com",
+                            EmailConfirmed = true,
+                            LockoutEnabled = false,
+                            Name = "admin",
+                            NormalizedUserName = "EXAMPLE@GMAIL.COM",
+                            PasswordHash = "AQAAAAIAAYagAAAAECeSb9vasTrAb8TrfbQP+Qnn4IBSltMwO/PXphH2BlFl94gSqAcCuKT9VpcMWy+r5w==",
+                            PhoneNumberConfirmed = false,
+                            ProfilePic = new byte[0],
+                            SecurityStamp = "9c3b4499-ec3e-4d41-86be-b111fb000135",
+                            TwoFactorEnabled = false,
+                            UserName = "example@gmail.com",
+                            YearsOfExperience = 0
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using PhotoShare.Data;
+using PhotoShare.Domain.Values;
 using PhotoShare.Infrastructure.Services;
 using UnidecodeSharpFork;
 
@@ -43,28 +44,27 @@ namespace PhotoShare.Pages.Location
         // more details, see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync(IFormFile upload)
         {
-
             if (upload != null && upload.Length > 0)
-            {
                 using (var ms = new MemoryStream())
                 {
                     upload.CopyTo(ms);
                     var fileBytes = ms.ToArray();
                     Location.ProfilePic = ms.ToArray();
-                    // string s = Convert.ToBase64String(fileBytes);
-                    // act on the Base64 data
                 }
-            }
 
-            Location.Area = Areas.Where(c => c.ID == AreaId).FirstOrDefault();
+            var area = Areas.Where(c => c.ID == AreaId).FirstOrDefault();
+            if (area != null)
+                Location.Area = area;
+            else
+                return BadRequest();
+
             if (!ModelState.IsValid)
-            {
                 return Page();
-            }
+
+            Location.ID = Guid.NewGuid().ToString();
 
             _context.Locations.Add(Location);
             await _context.SaveChangesAsync();
-            var text = Location.ID.Unidecode();
             await _blobStorageManager.CreateContainer(Location.ID.Unidecode());
 
             return RedirectToPage("./Index");

@@ -20,8 +20,4 @@
     <ProjectReference Include="..\PhotoShare.Infrastructure\PhotoShare.Infrastructure.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Pages\Shared\Components\" />
-  </ItemGroup>
-
 </Project>

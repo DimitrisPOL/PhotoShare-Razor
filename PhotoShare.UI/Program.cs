@@ -47,8 +47,8 @@ namespace PhotoShare
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
-            app.EnsureIdentityDbIsCreated();
-            app.SeedIdentityDataAsync();
+            //app.EnsureIdentityDbIsCreated();
+            //app.SeedIdentityDataAsync();
 
             app.UseRouting();
 

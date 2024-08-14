@@ -43,11 +43,18 @@ namespace PhotoShare.Pages.Province
         // more details, see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync()
         {
-            Province.Area = countries.Where(c => c.ID == CountryId).FirstOrDefault();
+            var country = countries.Where(c => c.ID == CountryId).FirstOrDefault();
+            if(country != null)
+                Province.Country = country;
+            else
+                return BadRequest();
+
             if (!ModelState.IsValid)
             {
                 return Page();
             }
+
+            Province.ID = Guid.NewGuid().ToString();
 
             _context.Provinces.Add(Province);
             await _context.SaveChangesAsync();

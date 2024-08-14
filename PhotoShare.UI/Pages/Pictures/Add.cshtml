@@ -1,0 +1,20 @@
+﻿@page
+@model PhotoShare.Pages.Pictures.AddModel
+@{
+}
+
+<img src="http://127.0.0.1:10000/devstoreaccount1/quickstartblobs/quickstartblobs2.jpg" />
+<form method="post" asp-page="Index" enctype="multipart/form-data">
+    Photos <input type="file" name="photos" multiple="multiple" accept="image/*" />
+    <br />
+    <input type="submit" value="Upload" />
+    @if (Model.FileNames != null && Model.FileNames.Count > 0)
+    {
+        <ul>
+            @foreach (var fileName in Model.FileNames)
+            {
+                <li><img src="~/images/@fileName" /></li>
+            }
+        </ul>
+    }
+</form>

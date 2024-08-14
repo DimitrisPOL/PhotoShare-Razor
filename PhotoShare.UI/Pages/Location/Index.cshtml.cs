@@ -20,7 +20,6 @@ namespace PhotoShare.Pages.Location
 
         public async Task OnGetAsync()
         {
-            Location = new List<Domain.Values.Location>();
             Location = await _context.Locations.ToListAsync();
         }
     }
