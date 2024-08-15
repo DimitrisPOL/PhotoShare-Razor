@@ -207,12 +207,11 @@ window.onscroll = function (ev) {
 //});
 
 $(function () {
-    $("#txtLocation")
-        .autocomplete({
+    $("#txtLocation").autocomplete({
             source:
                 function (request, response) {
                     $.ajax({
-                        url: '/Memory-Pic/Index?handler=AutoComplete',
+                        url: '/Index?handler=AutoComplete',
                         data: { "prefix": request.term },
                         type: "GET",
                         success: function (data) {

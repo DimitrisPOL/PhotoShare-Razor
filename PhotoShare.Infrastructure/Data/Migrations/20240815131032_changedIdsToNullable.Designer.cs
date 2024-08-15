@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PhotoShare.Data;
 
@@ -11,9 +12,11 @@ using PhotoShare.Data;
 namespace PhotoShare.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240815131032_changedIdsToNullable")]
+    partial class changedIdsToNullable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -227,6 +230,7 @@ namespace PhotoShare.Data.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("AreaID")
+                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Name")
@@ -243,6 +247,7 @@ namespace PhotoShare.Data.Migrations
                         .HasColumnType("bigint");
 
                     b.Property<byte[]>("ProfilePic")
+                        .IsRequired()
                         .HasColumnType("varbinary(max)");
 
                     b.Property<string>("SearchIndex")
@@ -313,6 +318,7 @@ namespace PhotoShare.Data.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("CountryID")
+                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Name")
@@ -496,7 +502,9 @@ namespace PhotoShare.Data.Migrations
                 {
                     b.HasOne("PhotoShare.Domain.Values.Area", "Area")
                         .WithMany()
-                        .HasForeignKey("AreaID");
+                        .HasForeignKey("AreaID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Area");
                 });
@@ -505,7 +513,9 @@ namespace PhotoShare.Data.Migrations
                 {
                     b.HasOne("PhotoShare.Domain.Values.Country", "Country")
                         .WithMany()
-                        .HasForeignKey("CountryID");
+                        .HasForeignKey("CountryID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Country");
                 });

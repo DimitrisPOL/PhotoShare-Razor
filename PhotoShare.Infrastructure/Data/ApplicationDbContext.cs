@@ -21,6 +21,8 @@ namespace PhotoShare.Data
         protected override void OnModelCreating(ModelBuilder builder)
         {
 
+
+
            // string ADMIN_ID = "02174cf0–9412–4cfe-afbf-59f706d72cf6";
            // string ROLE_ID = "2652f744-d840-4c18-9ecf-87e84355101f";
 

@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using PhotoShare.Data;
 using PhotoShare.Domain.Values;
+using PhotoShare.Extensions;
 using PhotoShare.Infrastructure.Services;
 using UnidecodeSharpFork;
 
@@ -30,11 +31,13 @@ namespace PhotoShare.Pages.Location
             Areas.ForEach(c => Cities.Add(new SelectListItem(c.Name, c.ID)));
         }
 
-        public IActionResult OnGet()
+        public IActionResult OnGet(string errorMessage = null)
         {
+            ErrorMessage = errorMessage;
             return Page();
         }
 
+        public string ErrorMessage { get; set; }
         [BindProperty]
         public Domain.Values.Location Location { get; set; }
         [BindProperty]
@@ -44,6 +47,14 @@ namespace PhotoShare.Pages.Location
         // more details, see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync(IFormFile upload)
         {
+            Location.ID = Guid.NewGuid().ToString();
+
+            if (!ModelState.IsValid)
+            {
+                ErrorMessage = ModelState.GetModelStateErrorMeggages();
+                return RedirectToPage("./Create", new { errorMessage = ErrorMessage });
+            }
+
             if (upload != null && upload.Length > 0)
                 using (var ms = new MemoryStream())
                 {
@@ -56,10 +67,7 @@ namespace PhotoShare.Pages.Location
             if (area != null)
                 Location.Area = area;
             else
-                return BadRequest();
-
-            if (!ModelState.IsValid)
-                return Page();
+                return RedirectToPage("./Create", new { errorMessage ="Area is required" });
 
             Location.ID = Guid.NewGuid().ToString();
 

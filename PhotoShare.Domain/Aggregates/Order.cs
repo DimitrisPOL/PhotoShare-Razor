@@ -7,7 +7,7 @@ namespace PhotoShare.Domain.Aggregates
 {
     public class Order
     {
-        public string ID { get; set; }
+        public string? ID { get; set; }
         public string OrderFriendlyName { get; set; }
         public string PhotographerId { get; set; }
         public string UserId { get; set; }

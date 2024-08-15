@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using PhotoShare.Data;
 using PhotoShare.Domain.Values;
+using PhotoShare.Extensions;
 
 namespace PhotoShare.Pages.Country
 {
@@ -16,11 +17,13 @@ namespace PhotoShare.Pages.Country
             _context = context;
         }
 
-        public IActionResult OnGet()
+        public IActionResult OnGet(string errorMessage = null)
         {
+            ErrorMessage = errorMessage;
             return Page();
         }
 
+        public string ErrorMessage { get; set; }
         [BindProperty]
         public Domain.Values.Country Country { get; set; }
 
@@ -29,10 +32,11 @@ namespace PhotoShare.Pages.Country
         public async Task<IActionResult> OnPostAsync()
         {
             Country.ID = Guid.NewGuid().ToString();
-
+            
             if (!ModelState.IsValid)
             {
-                return Page();
+                ErrorMessage = ModelState.GetModelStateErrorMeggages();
+                return RedirectToPage("./Create", new { errorMessage = ErrorMessage });
             }
 
             _context.Countries.Add(Country);

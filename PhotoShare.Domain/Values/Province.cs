@@ -8,9 +8,9 @@ namespace PhotoShare.Domain.Values
 {
     public class Province
     {
-        public string ID { get; set; }
+        public string? ID { get; set; }
         public string Name { get; set; }
-        public Country Country { get; set; }
+        public Country? Country { get; set; }
         public string TelephonePrefix1 { get; set; }
         public int TelephonePrefix2 { get; set; }
         public int NumberOfOutposts { get; set; }

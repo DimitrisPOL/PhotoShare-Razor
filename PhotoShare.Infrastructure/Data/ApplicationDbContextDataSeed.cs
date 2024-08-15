@@ -13,34 +13,57 @@ namespace PhotoShare.Infrastructure.Data
         /// <returns></returns>
         public static async Task SeedAsync(UserManager<PhotographyUser> userManager, RoleManager<IdentityRole> roleManager)
         {
-            try
+
+            var adminRole = new IdentityRole("admin");
+                
+            if((await roleManager.GetRoleNameAsync(adminRole)) == null)
             {
 
-                // Add roles supported
-                await roleManager.CreateAsync(new IdentityRole("ADMIN"));
-                await roleManager.CreateAsync(new IdentityRole("PHOTOGRAPHER"));
+                adminRole.NormalizedName = "ADMIN";
+                adminRole.Id = Guid.NewGuid().ToString();
+                adminRole.ConcurrencyStamp = adminRole.Id;
 
-                // New admin user
-                string adminUserName = "example@gmail.com";
-                var adminUser = new PhotographyUser
+                await roleManager.CreateAsync(adminRole);
+            }
+
+
+            var photographerRole = new IdentityRole("photographer");
+
+            if ((await roleManager.GetRoleNameAsync(photographerRole)) == null)
+            {
+                photographerRole.NormalizedName = "PHOTOGRAPHER";
+                photographerRole.Id = Guid.NewGuid().ToString();
+                photographerRole.ConcurrencyStamp = photographerRole.Id;
+
+                await roleManager.CreateAsync(photographerRole);
+            }
+
+
+            // New admin user
+            string adminUserName = "admin@photoshare.com";
+
+            PhotographyUser adminUser = await userManager.FindByEmailAsync(adminUserName);
+
+
+
+            if (adminUser == null) 
+            {
+                adminUser = new PhotographyUser
                 {
-                    Email = "example@gmail.com",
+                    Email = adminUserName,
                     City = "Athens",
                     Degree = "Masters",
                     Name = "admin",
                     ProfilePic = new byte[] { },
                     EmailConfirmed = true,
-                    UserName = "example@gmail.com",
-                    NormalizedUserName = "EXAMPLE@GMAIL.COM"
+                    UserName = adminUserName,
+                    NormalizedUserName = "ADMIN@PHOTOSHARE.COM"
                 };
-                // Add new user and their role
-                var res = await userManager.CreateAsync(adminUser, "Abc123!");
-                adminUser = await userManager.FindByNameAsync(adminUserName);
-                await userManager.AddToRoleAsync(adminUser, "ADMIN");
-            }
-            catch (Exception ex)
-            {
 
+                // Add new user and their role
+                await userManager.CreateAsync(adminUser, "Abc123!");
+
+                await userManager.AddToRoleAsync(adminUser, "ADMIN");
             }
         }
     }

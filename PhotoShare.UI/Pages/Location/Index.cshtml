@@ -10,9 +10,6 @@
 <link href="~/css/simple-sidebar.css" rel="stylesheet" />
 <div class="d-flex" id="wrapper">
 
-    <link href="~/css/simple-sidebar.css" rel="stylesheet" />
-    <div class="d-flex" id="wrapper">
-
         @await Component.InvokeAsync("AdminMenu", new AdminMenuViewModel(typeof(CreateModel).Namespace))
 
         <!-- /#sidebar-wrapper -->
@@ -104,17 +101,3 @@
             </div>
         </div>
         </div>
-
-    </div>
-    <!-- /#wrapper -->
-    <!-- Bootstrap core JavaScript -->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-    <!-- Menu Toggle Script -->
-    <script>
-        $("#menu-toggle").click(function (e) {
-            e.preventDefault();
-            $("#wrapper").toggleClass("toggled");
-        });
-    </script>

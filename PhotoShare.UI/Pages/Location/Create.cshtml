@@ -7,6 +7,9 @@
     Layout = "~/Pages/Shared/_Layout.cshtml";
 }
 
+<h1>Create</h1>
+<link href="~/css/simple-sidebar.css" rel="stylesheet" />
+
 <div class="d-flex" id="wrapper">
 
     @await Component.InvokeAsync("AdminMenu", new AdminMenuViewModel(typeof(CreateModel).Namespace))
@@ -21,6 +24,9 @@
 
         <div class="row">
             <div class="col-md-4">
+                @{
+                    await Html.RenderPartialAsync("_FormErrorMessagePartial", Model.ErrorMessage);
+                }
                 <form enctype="multipart/form-data" method="post" style="float:left;">
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>                   
                     <div class="form-group">
@@ -30,7 +36,7 @@
                     </div>
                     <div class="form-group">
                         <label asp-for="Location.TelephonePrefix1" class="control-label"></label>
-                        <input asp-for="Location.TelephonePrefix1" class="form-control"  value="0"/>
+                        <input asp-for="Location.TelephonePrefix1" class="form-control"/>
                         <span asp-validation-for="Location.TelephonePrefix1" class="text-danger"></span>
                     </div>
                     <div class="form-group">
@@ -47,7 +53,7 @@
                         <select asp-for="AreaId" asp-items="@Model.Cities" class="form-control">
                             <option value="">Choose a day</option>
                         </select>
-                        <span asp-validation-for="Location.Area" class="text-danger"></span>
+                        <span asp-validation-for="AreaId" class="text-danger"></span>
                     </div>
                     <div class="form-group">
                         <input type="submit" value="Create" class="btn btn-primary" />
@@ -64,11 +70,3 @@
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
-
-<!-- Menu Toggle Script -->
-<script>
-    $("#menu-toggle").click(function (e) {
-        e.preventDefault();
-        $("#wrapper").toggleClass("toggled");
-    });
-</script>

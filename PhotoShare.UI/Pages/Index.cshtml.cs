@@ -42,41 +42,41 @@ namespace PhotoShare.Pages
                 Url = Configuration.Settings.BaseUrl;
 
 
-                if (LocationToDisplay.Count == 1)
-                {
-                    Location = await _context.Locations.ToListAsync();
-                }
-                else
-                    Location = await _context.Locations.Where(l => LocationToDisplay.Contains(l.Name)).ToListAsync();
+                //if (LocationToDisplay.Count == 1)
+                //{
+                //    Location = await _context.Locations.ToListAsync();
+                //}
+                //else
+                //    Location = await _context.Locations.Where(l => LocationToDisplay.Contains(l.Name)).ToListAsync();
 
 
 
-                if (searchString == null)
-                {
+                //if (searchString == null)
+                //{
 
-                    PhotoBlobs = new List<PhotoBlob>();
-                    foreach (var loc in Location)
-                    {
-                        var blobs = await _blobStorageManager.GetPictures(loc.ID, Configuration.Settings.LocationsSettings.PicsPerLocation, 0);
-                        if (blobs != null)
-                            PhotoBlobs.AddRange(blobs);
-                    }
-                }
-                else
-                {
-                    var loc = _context.Locations.Where(l => l.Name.Contains(searchString) || l.SearchIndex.Contains(searchString)).FirstOrDefault();
-                    PhotoBlobs = new List<PhotoBlob>();
+                //    PhotoBlobs = new List<PhotoBlob>();
+                //    foreach (var loc in Location)
+                //    {
+                //        var blobs = await _blobStorageManager.GetPictures(loc.ID, Configuration.Settings.LocationsSettings.PicsPerLocation, 0);
+                //        if (blobs != null)
+                //            PhotoBlobs.AddRange(blobs);
+                //    }
+                //}
+                //else
+                //{
+                //    var loc = _context.Locations.Where(l => l.Name.Contains(searchString) || l.SearchIndex.Contains(searchString)).FirstOrDefault();
+                //    PhotoBlobs = new List<PhotoBlob>();
 
-                    if (loc != null)
-                    {
-                        var blobs = await _blobStorageManager.GetPictures(loc?.ID, Configuration.Settings.LocationsSettings.PicsPerLocation * 5, 0);
-                        if (blobs != null)
-                            PhotoBlobs.AddRange(blobs);
-                    }
+                //    if (loc != null)
+                //    {
+                //        var blobs = await _blobStorageManager.GetPictures(loc?.ID, Configuration.Settings.LocationsSettings.PicsPerLocation * 5, 0);
+                //        if (blobs != null)
+                //            PhotoBlobs.AddRange(blobs);
+                //    }
 
 
 
-                }
+                //}
 
             }
             catch (Exception ex) { }

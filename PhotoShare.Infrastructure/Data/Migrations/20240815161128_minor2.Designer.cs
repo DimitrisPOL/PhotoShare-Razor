@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PhotoShare.Data;
 
@@ -11,9 +12,11 @@ using PhotoShare.Data;
 namespace PhotoShare.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240815161128_minor2")]
+    partial class minor2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -243,6 +246,7 @@ namespace PhotoShare.Data.Migrations
                         .HasColumnType("bigint");
 
                     b.Property<byte[]>("ProfilePic")
+                        .IsRequired()
                         .HasColumnType("varbinary(max)");
 
                     b.Property<string>("SearchIndex")

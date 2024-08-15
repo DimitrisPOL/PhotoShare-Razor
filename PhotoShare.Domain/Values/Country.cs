@@ -8,7 +8,7 @@ namespace PhotoShare.Domain.Values
 {
     public class Country
     {
-        public string ID { get; set; }
+        public string? ID { get; set; }
         public string Name { get; set; }
         public string TelephonePrefix1 { get; set; }
         public int TelephonePrefix2 { get; set; }

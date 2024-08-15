@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using PhotoShare.Data;
 using PhotoShare.Domain.Values;
+using PhotoShare.Extensions;
 
 
 namespace PhotoShare.Pages.Province
@@ -16,23 +17,23 @@ namespace PhotoShare.Pages.Province
     public class CreateModel : PageModel
     {
         private readonly ApplicationDbContext _context;
-        public List<Domain.Values.Country> countries;
-        public List<SelectListItem> Cities { get; set; }
+        public List<SelectListItem> Countries { get; set; }
 
 
     public CreateModel(ApplicationDbContext context)
         {
-            Cities = new List<SelectListItem>();
+            Countries = new List<SelectListItem>();
             _context = context;
-            countries = _context.Countries.ToList();
-            countries.ForEach( c => Cities.Add(new SelectListItem( c.Name, c.ID)));
+            _context.Countries.ToList().ForEach( c => Countries.Add(new SelectListItem( c.Name, c.ID)));
         }
 
-        public void OnGet()
+        public IActionResult OnGet(string errorMessage = null)
         {
-
-           // return Page();
+            ErrorMessage = errorMessage;
+            return Page();
         }
+
+        public string ErrorMessage { get; set; }
 
         [BindProperty]
         public Domain.Values.Province Province { get; set; }
@@ -43,16 +44,18 @@ namespace PhotoShare.Pages.Province
         // more details, see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync()
         {
-            var country = countries.Where(c => c.ID == CountryId).FirstOrDefault();
+            if (!ModelState.IsValid)
+            {
+                ErrorMessage = ModelState.GetModelStateErrorMeggages();
+                return RedirectToPage("./Create", new { errorMessage = ErrorMessage });
+            }
+
+            var country = _context.Countries.Where(c => c.ID == CountryId).FirstOrDefault();
             if(country != null)
                 Province.Country = country;
             else
-                return BadRequest();
+                return RedirectToPage("./Create", new { errorMessage = "You must select country" });
 
-            if (!ModelState.IsValid)
-            {
-                return Page();
-            }
 
             Province.ID = Guid.NewGuid().ToString();
 
