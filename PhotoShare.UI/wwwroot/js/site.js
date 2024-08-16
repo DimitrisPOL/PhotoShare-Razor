@@ -22,7 +22,7 @@ function myShare(s) {
 };
 
 // Write your Javascript code.
-function myFunction() {
+function toggleDropdown() {
     document.getElementById("myDropdown").classList.toggle("show");
 }
 

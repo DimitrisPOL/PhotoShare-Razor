@@ -13,28 +13,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - Photo</title>
     @*     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> *@
+
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+    <link href="~/css/slide-show.css" rel="stylesheet" />
+    <link href="~/css/globals.css" rel="stylesheet" />
+    <link href="~/css/site.css" rel="stylesheet" />
+    <link href="~/css/SearchItem.css" rel="stylesheet" />
+    <link href="~/css/jquery-ui.css" rel="stylesheet" />
+
+    <script src="~/js/jquery-1.10.0.min.js"></script>
+    <script src="~/js/jquery-ui.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+@*     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+
+    <link href="https://ajax.aspnetcdn.com/ajax/jquery.ui/1.10.0/themes/blitzer/jquery-ui.css" /> *@
+
+
+
+@*     <title>@ViewData["Title"] - Photo</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link href="~/css/SearchItem.css" rel="stylesheet" />
     <link href="~/css/site.css" rel="stylesheet" />
 
-    <link rel="stylesheet" href="~/css/front-page/bootstrap.min.css" />
-    <link href="~/css/front-page/slide-show.css" rel="stylesheet" />
-    <link href="~/css/front-page/SearchBox.css" rel="stylesheet" />
-    <link href="~/css/front-page/jquery-ui.css" rel="stylesheet" />
     <link href="~/css/globals.css" rel="stylesheet" />
     <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
 
     <script src="~/js/jquery-1.10.0.min.js"></script>
-    @*     <script src="~/js/jquery-ui.min222.js"></script> *@
-    <script src="~/js/jquery-ui.min.js"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
-
-    <link href="https://ajax.aspnetcdn.com/ajax/jquery.ui/1.10.0/themes/blitzer/jquery-ui.css" />
-
- @*    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script> *@
-
-
-
+    <script src="~/js/jquery-ui.min.js"></script> *@
     
 </head>
 <body>
@@ -45,23 +51,13 @@
 
         <div class="container-fluid">
             <div class="row">
-                <div class="col-2">
+                <div class="col-2 col-md-2 col-sm-2">
                     <a class="navbar-brand" asp-area="" asp-page="/Index">
                         <img style="max-width:100%;" src="~/images/mempic.webp" height="90" width="220" />
                     </a>
                 </div>
-                @*<button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-                </button>*@
-                @*<div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">*@
 
-                @* <ul class="navbar-nav flex-grow-1">*@
-
-                @*<li class="nav-item">*@
-                @*<div class="collapse navbar-collapse" id="navbarSupportedContent">*@
-
-                <div class="col-8">
+                <div class="col-8 col-md-10 col-sm-10 main-menu">
 
                     <div class="my-nav">
                         <ul>
@@ -75,48 +71,28 @@
                             <li>
                                 <a class="nav-link text-dark" asp-area="" asp-page="/Contact">Contacts</a>
                             </li>
-                            @*<li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Dropdown
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="#">Action</a>
-                            <a class="dropdown-item" href="#">Another action</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">Something else here</a>
-                            </div>
-                            </li>*@
 
                         </ul>
 
                     </div>
                     <div class="dropdown">
 
-                        <img onclick="myFunction()" class="dropbtn" src="~/images/menu.png" />
+                        <img onclick="toggleDropdown()" class="dropbtn" src="~/images/menu.png" />
                         <div id="myDropdown" class="dropdown-content">
                             <a asp-page="/Photgraphers/Index">Our photographers</a>
                             <a asp-area="" asp-page="/Privacy">How we work</a>
                             <a asp-area="" asp-page="../Contacts">Contacts</a>
-                            <a asp-area="" asp-page="Contacts">Contacts2</a>
-                            <a asp-area="" asp-page="/Contacts">Contacts3</a>
                         </div>
                     </div>
                 </div>
 
 
-                <div class="col-2">
-                    <a class="navbar-brand" asp-area="" asp-page="/Index">
+                <div class="col-2 col-md-1 col-sm-1 extra-image">
+                    <a asp-area="" asp-page="/Index">
                         <img src="~/images/MEMORIES.webp" height="90" width="220" />
                     </a>
                 </div>
             </div>
-
-            @*</div>*@
-            @*</li>*@
-
-            @*</ul>*@
-
-            @*</div>*@
         </div>
 
 
@@ -149,18 +125,11 @@
 
 @*     <script src="~/lib/jquery/dist/jquery.min.map"></script> *@
 @*     <script src="~/js/jquery-1.10.0.js"></script> *@
-    <link href="~/css/slide-show.css" rel="stylesheet" />
 
-
-
-
-
-    <script src="~/js/site.js"></script>
 
  @*    <script src="~/js/mini-jquery-ui.js"></script> *@
 
 
-    <script src="~/js/site.js" asp-append-version="true"></script>
 
     @RenderSection("Scripts", required: false)
 </body>

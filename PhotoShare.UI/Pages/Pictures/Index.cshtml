@@ -1,4 +1,32 @@
 ﻿@page
+@using PhotoShare.Views.Shared.Components.AdminMenu
 @model PhotoShare.Pages.Pictures.IndexModel
 @{
 }
+
+}
+<link href="~/css/simple-sidebar.css" rel="stylesheet" />
+<div class="d-flex" id="wrapper">
+
+    <!-- Sidebar -->
+    @await Component.InvokeAsync("AdminMenu", new AdminMenuViewModel(typeof(PhotoShare.Pages.Pictures.AddModel).Namespace))
+
+    <!-- /#sidebar-wrapper -->
+    <!-- Page Content -->
+    <div id="page-content-wrapper">
+
+        @{
+            await Html.RenderPartialAsync("_ToggleMenuPartial");
+        }
+
+        <div class="container-fluid">
+
+            <h1>Index</h1>
+
+            <p>
+                <a asp-page="Create">Create New</a>
+            </p>
+            
+        </div>
+    </div>
+</div>

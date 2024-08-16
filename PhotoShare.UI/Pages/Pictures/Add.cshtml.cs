@@ -25,6 +25,7 @@ namespace PhotoShare.Pages.Pictures
         {
         }
 
+        public string ErrorMessage { get; set; }
         public List<string> FileNames { get; set; }
 
         public async Task<IActionResult> OnPostAsync(IFormFile[] photos)

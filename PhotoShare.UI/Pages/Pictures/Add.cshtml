@@ -1,20 +1,57 @@
 ﻿@page
+@using PhotoShare.Views.Shared.Components.AdminMenu
 @model PhotoShare.Pages.Pictures.AddModel
 @{
 }
 
-<img src="http://127.0.0.1:10000/devstoreaccount1/quickstartblobs/quickstartblobs2.jpg" />
-<form method="post" asp-page="Index" enctype="multipart/form-data">
-    Photos <input type="file" name="photos" multiple="multiple" accept="image/*" />
-    <br />
-    <input type="submit" value="Upload" />
-    @if (Model.FileNames != null && Model.FileNames.Count > 0)
-    {
-        <ul>
-            @foreach (var fileName in Model.FileNames)
-            {
-                <li><img src="~/images/@fileName" /></li>
-            }
-        </ul>
+
+
+<h1>Add</h1>
+
+<h4>Province</h4>
+<link href="~/css/simple-sidebar.css" rel="stylesheet" />
+<div class="d-flex" id="wrapper">
+
+    @await Component.InvokeAsync("AdminMenu", new AdminMenuViewModel(typeof(PhotoShare.Pages.Pictures.AddModel).Namespace))
+
+    <div id="page-content-wrapper">
+
+        @{
+            await Html.RenderPartialAsync("_ToggleMenuPartial");
+        }
+
+        <div class="row">
+            <div class="col-md-4">
+
+                @{
+                    await Html.RenderPartialAsync("_FormErrorMessagePartial", Model.ErrorMessage);
+                }
+
+                <img src="http://127.0.0.1:10000/devstoreaccount1/quickstartblobs/quickstartblobs2.jpg" />
+                <form method="post" asp-page="Index" enctype="multipart/form-data">
+                    Photos <input type="file" name="photos" multiple="multiple" accept="image/*" />
+                    <br />
+                    <input type="submit" value="Upload" />
+                    @if (Model.FileNames != null && Model.FileNames.Count > 0)
+                    {
+                        <ul>
+                            @foreach (var fileName in Model.FileNames)
+                            {
+                                <li><img src="~/images/@fileName" /></li>
+                            }
+                        </ul>
+                    }
+                </form>
+            </div>
+        </div>
+        <div>
+            <a asp-page="Index">Back to List</a>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
-</form>
+}
