@@ -10,7 +10,7 @@ using PhotoShare.Data;
 using PhotoShare.Domain.Values;
 
 
-namespace PhotoShare.Pages.PhotographersPage
+namespace PhotoShare.Pages.PhotographersAdminPage
 {
     [Authorize(Roles = "admin")]
     public class DetailsModel : PageModel

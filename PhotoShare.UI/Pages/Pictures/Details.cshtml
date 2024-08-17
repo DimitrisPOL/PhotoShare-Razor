@@ -1,0 +1,45 @@
+﻿@page "{photoUrl}"
+@model PhotoShare.Pages.Pictures.PhotoDetailsModel
+@{
+        ViewData["image_url"] = Model.Pic;
+    ViewData["cannon_url"] = Model.Url;
+    ViewData["name"] = Model.Name;
+}
+
+@*<meta property="og:url" content="@Model.Url" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="@Model.Name" />
+    <meta property="og:description" content="Your description" />
+    <meta property="og:image" content="@Model.Pic" />*@
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-10">
+
+            <img src="@Model.Pic" style="height: 410px;width:100%;">
+        </div>
+        <div class="col-sm-2">
+            @*<div class="fb-share-button"
+                     data-href="@Model.Url/PhotoDetails?photoUrl=@Model.Pic"
+                     data-layout="button_count">
+                </div>*@
+
+            @*<div class="fb-share-button"
+                     data-href="@Model.Url/PhotoDetails?photoUrl=@Html.UrlEncoder.Encode(photo.Url.ToString())"
+                     data-layout="button_count">
+                </div>*@
+            <div class="photo-details-menu">
+
+
+                <a class="share-ico" href="">
+                    <img onclick='myShare("@Model.Url/PhotoDetails/@Model.Pic?name=@Model.Name")' src="~/images/facebook-share-button3.png" />
+                </a>
+                <a class="download-ico" href="@Model.Pic" download>
+                    <img src="~/images/download-icon.png" />
+                </a>
+            </div>
+
+        </div>
+
+    </div>
+</div>

@@ -1,46 +1,45 @@
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
+using PhotoShare.Data;
+using PhotoShare.Domain.Values;
 using PhotoShare.Infrastructure.Data.Users;
 
-namespace PhotoShare.Areas.Identity.Pages.Photgraphers
+
+namespace PhotoShare.Pages.PhotographersAdminPage
 {
-    public class IndexModel : PageModel
+    [Authorize(Roles = "admin")]
+    public class DeleteModel : PageModel
     {
         public List<PhotographyUser> Users;
+        private readonly ApplicationDbContext _context;
         private readonly UserManager<PhotographyUser> _userManager;
-        public RoleManager<IdentityRole> _rolemanager;
-        public string NameSort { get; set; }
-        public string NameFilter { get; set; }
-        public IndexModel(UserManager<PhotographyUser> userManager, RoleManager<IdentityRole> roleManager)
+
+        public DeleteModel(ApplicationDbContext context, 
+            UserManager<PhotographyUser> userManager)
         {
+            _context = context;
             _userManager = userManager;
-            _rolemanager = roleManager;
-            Users = new List<PhotographyUser>();
         }
+
 
         public async Task OnGetAsync(string sortOrder, string searchString)
         {
 
-            NameSort = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            var NameSort = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
 
-            NameFilter = searchString;
+            var NameFilter = searchString;
 
             Users = (List<PhotographyUser>)await _userManager.GetUsersInRoleAsync("Photographer");
-
-
 
             switch (sortOrder)
             {
                 case "name_desc":
                     Users = Users.OrderByDescending(s => s.UserName).ToList();
                     break;
-                //case "Date":
-                //    UsersIQ = UsersIQ.OrderBy(s => s.);
-                //    break;
-                //case "date_desc":
-                //    UsersIQ = UsersIQ.OrderByDescending(s => s.EnrollmentDate);
-                //    break;
                 default:
                     Users = Users.OrderBy(s => s.Name).ToList();
                     break;
@@ -48,7 +47,21 @@ namespace PhotoShare.Areas.Identity.Pages.Photgraphers
 
             if (NameFilter != null)
                 Users = Users.Where(s => s.Name.Contains(NameFilter) || s.UserName.Contains(NameFilter)).ToList();
+        }
 
+
+        public async Task<IActionResult> OnPostAsync(string id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var user = await _userManager.FindByIdAsync(id);
+
+            await _userManager.DeleteAsync(user);
+
+            return RedirectToPage("./Index");
         }
     }
 }

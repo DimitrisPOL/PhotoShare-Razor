@@ -8,5 +8,6 @@ namespace PhotoShare.Infrastructure.Services
         public Task CreateContainer(string name);
         public Task UploadBlobPicture(string blobName, string fileName, Stream path);
         public Task<List<PhotoBlob>> GetPictures(string name, int pageSize = 2, int skip = 0);
+        public Task DeletePictures(string blobName);
     }
 }

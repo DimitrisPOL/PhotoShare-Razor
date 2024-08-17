@@ -1,11 +1,13 @@
 ﻿@page
 @using PhotoShare.Views.Shared.Components.AdminMenu
-@model PhotoShare.Pages.PhotographersPage.IndexModel
+@model PhotoShare.Pages.PhotographersAdminPage.DeleteModel
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Delete";
     Layout = "~/Pages/Shared/_Layout.cshtml";
 }
+
+<h1>Delete</h1>
 
 
 <link href="~/css/simple-sidebar.css" rel="stylesheet" />
@@ -18,16 +20,16 @@
     <!-- Page Content -->
     <div id="page-content-wrapper">
 
-            @{
-                await Html.RenderPartialAsync("_ToggleMenuPartial");
-            }
+        @{
+            await Html.RenderPartialAsync("_ToggleMenuPartial");
+        }
 
         <div class="container-fluid">
 
             <h1>Index</h1>
 
             <p>
-                <a asp-area="" asp-page="/Photgraphers/RegisterPhotographer">Create New</a>
+                <a asp-area="" asp-page="/PhotographersAdminPage/RegisterPhotographer">Create New</a>
             </p>
             <table class="table">
                 <thead>
@@ -69,7 +71,7 @@
 
                         <tr>
                             <td>
-                                
+                                @Html.DisplayFor(modelItem => item.Name)
                             </td>
                             <td>
                                 @Html.DisplayFor(modelItem => item.PhoneNumber)
@@ -81,17 +83,14 @@
                                 <img style="width:30px;height:40px;" src="@imgSrc" class="img-radius" alt="User-Profile-Image">
                             </td>
                             <td>
-                                @if (!item.EmailConfirmed || item.LockoutEnabled)
+                                @if (item.LockoutEnabled)
                                 {
-                                    <a asp-page-handler="Manage" asp-route-command="enable" asp-route-id="@item.Id">Enable User</a>
+                                    <a asp-page-handler="EnableToggle" asp-route-id="@item.Id">Enable User</a>
                                 }
                                 else
                                 {
-                                    <a asp-page-handler="Manage" asp-route-command="disable"  asp-route-id="@item.Id">Disable User</a>
+                                    <a asp-page-handler="EnableToggle" asp-route-id="@item.Id">Disable User</a>
                                 }
-
-                                @if (!item.EmailConfirmed)
-                                {<a asp-page-handler="Manage" style="background-color:wheat;" asp-route-command="confirm" asp-route-id="@item.Id">Confirm User's Email</a>}
                             </td>
                         </tr>
                     }
@@ -101,25 +100,8 @@
         </div>
     </div>
 
-
-
-
-
-
-
-
-
-
 </div>
 <!-- /#wrapper -->
 <!-- Bootstrap core JavaScript -->
 <script src="vendor/jquery/jquery.min.js"></script>
 <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-<!-- Menu Toggle Script -->
-<script>
-    $("#menu-toggle").click(function (e) {
-        e.preventDefault();
-        $("#wrapper").toggleClass("toggled");
-    });
-</script>

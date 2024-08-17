@@ -27,25 +27,48 @@
                     await Html.RenderPartialAsync("_FormErrorMessagePartial", Model.ErrorMessage);
                 }
 
-                <img src="http://127.0.0.1:10000/devstoreaccount1/quickstartblobs/quickstartblobs2.jpg" />
-                <form method="post" asp-page="Index" enctype="multipart/form-data">
-                    Photos <input type="file" name="photos" multiple="multiple" accept="image/*" />
+
+                <form method="post" asp-page="Add" enctype="multipart/form-data">
+                    Photos
+                    <div class="form-group">
+                        <label asp-for="LocationId" class="control-label"></label>
+                        <select asp-for="LocationId" asp-items="@Model.Options" class="form-control">
+                            <option value="">Choose a location</option>
+                        </select>
+                        <span asp-validation-for="LocationId" class="text-danger"></span>
+                    </div>
+                    
+                    <input type="file" name="photos" multiple="multiple" accept="image/*" />
+
                     <br />
                     <input type="submit" value="Upload" />
-                    @if (Model.FileNames != null && Model.FileNames.Count > 0)
-                    {
-                        <ul>
-                            @foreach (var fileName in Model.FileNames)
-                            {
-                                <li><img src="~/images/@fileName" /></li>
-                            }
-                        </ul>
-                    }
                 </form>
             </div>
         </div>
         <div>
             <a asp-page="Index">Back to List</a>
+        </div>
+    </div>
+</div>
+<div class="d-flex flex-column bd-highlight mb-3" style="background-color: #faebd7;">
+    <div class="p-2 bd-highlight">
+        @*<div class="images-container">
+        <div class="text-center">
+        <div class="d-flex flex-row bd-highlight mb-3">
+
+        <div class="p-2 bd-highlight">*@
+        <div class="d-flex align-content-around flex-wrap">
+            @if (Model.PhotoBlobs != null)
+                @foreach (var photo in Model.PhotoBlobs)
+                {
+                    <div class="card" width="33%" height="300" style="overflow:hidden; margin:2px;">
+                        <img src="@photo.Url" height="200" />
+                        <div class="container">
+                            <h4><b>@photo.Name</b></h4>
+                        </div>
+                    </div>
+
+                }
         </div>
     </div>
 </div>

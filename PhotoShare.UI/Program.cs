@@ -22,7 +22,7 @@ namespace PhotoShare
             builder.Services.AddDbContext<ApplicationDbContext>(options => { options.UseSqlServer(connectionString, b => b.MigrationsAssembly("PhotoShare.Infrastructure")); });
             builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-            builder.Services.AddDefaultIdentity<PhotographyUser>(options => options.SignIn.RequireConfirmedAccount = true)
+            builder.Services.AddDefaultIdentity<PhotographyUser>(options => options.SignIn.RequireConfirmedAccount = false)
                           .AddRoles<IdentityRole>()
                           .AddEntityFrameworkStores<ApplicationDbContext>();
             builder.Services.AddRazorPages();

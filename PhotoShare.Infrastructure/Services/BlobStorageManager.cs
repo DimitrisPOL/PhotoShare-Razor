@@ -19,16 +19,7 @@ namespace PhotoShare.Infrastructure.Services
         public BlobStorageManager(IOptions<ApplicationConfiguration> optionsSnapshot)
         {
             Configuration = optionsSnapshot.Value;
-            try
-            {
-                blobServiceClient = new BlobServiceClient(Configuration.Settings.BlobStorageSettings.ConnectionString);
-            }
-            catch (Exception ex)
-            {
-                blobServiceClient = default;
-            }
-
-
+            blobServiceClient = new BlobServiceClient(Configuration.Settings.BlobStorageSettings.ConnectionString);
         }
 
         public async Task CreateContainer(string name)
@@ -41,28 +32,25 @@ namespace PhotoShare.Infrastructure.Services
             await client.SetAccessPolicyAsync(PublicAccessType.BlobContainer);
         }
 
-        public async Task DeletePictures(string blobName, string fileName, Stream path)
+        public async Task DeletePictures(string blobName)
         {
+            BlobContainerClient client = blobServiceClient.GetBlobContainerClient(blobName.ToLowerInvariant());
+            if (client == null)
+                return;
+            else
+                await client.DeleteAsync();
         }
 
-            public async Task UploadBlobPicture(string blobName, string fileName, Stream path)
+        public async Task UploadBlobPicture(string blobName, string fileName, Stream path)
         {
-            //string containerName = "quickstartblobs";\    
             CultureInfo en = new CultureInfo("en-US");
             blobName = blobName.ToString(en);
-            // Create the container and return a container client object
-            var client = blobServiceClient.GetBlobContainerClient(blobName.Unidecode());
-            
-            // BlobContainerClient containerClient = await blobServiceClient.CreateBlobContainerAsync(containerName);
-            // client.ExistsAsync(name);
-            //     var blobs = client.GetBlobs();
+            BlobContainerClient client = default;
 
-            // Open the file and upload its data
-            // var fileStream = File.OpenRead(@"C:\Users\dimip\Pictures\kinites4.jpg");
+            client = blobServiceClient.GetBlobContainerClient(blobName.Unidecode());
 
-            // var atr = File.GetAttributes(@"C:\Users\dimip\Pictures\kinites4.jpg");
-
-            // blobClient.SetHttpHeaders
+            if (!client.Exists())
+                await blobServiceClient.CreateBlobContainerAsync(blobName.Unidecode());
             try
             {
                 string contentType = Path.GetExtension(fileName);
@@ -73,19 +61,17 @@ namespace PhotoShare.Infrastructure.Services
                 else if (contentType == ".png")
                     header.ContentType = "image/png";
 
-                if(header.ContentType != null)
+                if (header.ContentType != null)
                 {
                     BlobClient blobClient = client.GetBlobClient(fileName.Unidecode());
                     var resp = await blobClient.UploadAsync(path, header);
                 }
-    
+
             }
             catch (Exception ex)
             {
-                
-            }
 
-            //fileStream.Close();
+            }
         }
 
         public async Task<List<PhotoBlob>> GetPictures(string name, int pageSize = 2, int skip = 0)
@@ -99,7 +85,7 @@ namespace PhotoShare.Infrastructure.Services
                 client = blobServiceClient.GetBlobContainerClient(name.Unidecode());
                 await client.SetAccessPolicyAsync(PublicAccessType.BlobContainer);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return null;
             }
@@ -107,35 +93,15 @@ namespace PhotoShare.Infrastructure.Services
 
             var blobs = client.GetBlobs().Skip(skip).Take(pageSize).ToList();
 
-
-            //var blobs2 = (IAsyncEnumerator<BlobItem>)client.GetBlobsAsync();
-            //await foreach (var blobItem in blobs2)
-            //{
-
-            //}
-                //.Skip(skip).Take(2).ToList();
-            // result.
-            // Enumerate the blobs returned for each page.
             foreach (BlobItem blobItem in blobs)
             {
-                //var result = blobPage.Values.Skip(skip).ToList();
-                //foreach (BlobItem blobItem in blobPage)
-                //{
-                    var builder = new UriBuilder(Configuration.Settings.BlobStorageSettings.Scheme, $"{Configuration.Settings.BlobStorageSettings.AzureSotrageAccountUrl}");
-                     builder.Path = $"{name}/{blobItem.Name}";
-                    photos.Add(new PhotoBlob(blobItem.Name, builder.Uri));
-               // }
+                var builder = new UriBuilder(Configuration.Settings.BlobStorageSettings.Scheme, $"{Configuration.Settings.BlobStorageSettings.AzureSotrageAccountUrl}");
+                builder.Path = $"{name}/{blobItem.Name}";
+                photos.Add(new PhotoBlob(blobItem.Name, builder.Uri));
             }
 
             return photos;
 
         }
-
-            //public async Task<bool> CheckIfBlobExists(string blobname)
-            //{
-            //    blobServiceClient.
-            //}
-
-
-        }
+    }
 }

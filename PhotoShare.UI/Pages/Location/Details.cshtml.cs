@@ -40,7 +40,9 @@ namespace PhotoShare.Pages.Location
                 return NotFound();
             }
 
-            PhotoBlobs = await _blobStorageManager.GetPictures(Location.ID, 40);
+            PhotoBlobs = await _blobStorageManager.GetPictures(Location.Name, 40);
+
+            Location.NumberOfPictures = PhotoBlobs.Count;
 
             return Page();
         }
@@ -51,32 +53,18 @@ namespace PhotoShare.Pages.Location
 
   
         public async Task<IActionResult> OnPostAsync(string id, IFormFile[] photos)
-        {
+        {   
             if (photos != null && photos.Length > 0)
             {
                 FileNames = new List<string>();
                 foreach (IFormFile photo in photos)
                 {
-                    string test = Location?.Name;
-                  
-                    var path = Path.Combine(_ihostingEnvironment.WebRootPath, "images", photo.FileName);
-
-
-                    //Uri uri = new Uri(hreflink);
-                    //if (uri.IsFile)
-                    //{
-                    //    string filename = System.IO.Path.GetFileName(uri.LocalPath);
-                    //}
-                   
-                    //var stream = new FileStream(path, FileMode.Create);
                     await _blobStorageManager.UploadBlobPicture(Name.ToLowerInvariant(), photo.FileName.ToLowerInvariant(), photo.OpenReadStream());
-                   // await photo.CopyToAsync(stream);
                     FileNames.Add(photo.FileName);
                 }
             }
 
             return await OnGetAsync(id);
-
         }
     }
 }

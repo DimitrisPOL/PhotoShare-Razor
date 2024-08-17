@@ -98,7 +98,7 @@ window.onscroll = function (ev) {
 
                         var uri = encodeURIComponent(item);
                         //<div class=\"main-pic-menu\"><a class=\"share-ico\" href=\"\" ><img onclick =\"myShare(\""+document.location.protocol + "\\\\" + document.location.hostname + ":" + document.location.port +"\\" + "PhotoDetails?photoUrl="+ item + "\") src = \"~/images/facebook-share-button3.png\" /></a > <a class=\"download-ico\" href=\"" + item + "\" download> <img src=\"/images/download-icon.png\" /> </a></div > 
-                        var html = "<a href=\"/PhotoDetails/" + uri + "\"><div class=\"main-pic\" ><img class=\"front-image\" src=\"" + item + "\" /></div></a>";
+                        var html = "<a href=\"/Pictures/Details/" + uri + "\"><div class=\"main-pic\" ><img class=\"front-image\" src=\"" + item + "\" /></div></a>";
                         var x = document.createElement("div");
 
                         /*               x.setAttribute("src", item);*/

@@ -1,0 +1,45 @@
+﻿@page
+@using PhotoShare.Views.Shared.Components.AdminMenu
+@model PhotoShare.Pages.Pictures.DeleteModel
+
+@{
+    ViewData["Title"] = "Delete";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+
+<link href="~/css/simple-sidebar.css" rel="stylesheet" />
+<div class="d-flex" id="wrapper">
+
+    <!-- Sidebar -->
+    @await Component.InvokeAsync("AdminMenu", new AdminMenuViewModel(typeof(PhotoShare.Pages.Pictures.AddModel).Namespace))
+
+    <!-- /#sidebar-wrapper -->
+    <!-- Page Content -->
+    <div id="page-content-wrapper">
+
+        @{
+            await Html.RenderPartialAsync("_ToggleMenuPartial");
+        }
+
+        <div class="container-fluid">
+
+            <h1>Index</h1>
+
+            <p>
+                <a asp-page="Add">Create New</a>
+            </p>
+
+            <form method="post">
+                Photos
+                <div class="form-group">
+                </div>
+
+                <br />
+                <input type="submit" value="Get Pictures" />
+            </form>
+
+        </div>
+
+    </div>
+</div>

@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using PhotoShare.Data;
 
 
-namespace PhotoShare.Pages.PhotographersPage
+namespace PhotoShare.Pages.PhotographersAdminPage
 {
     [Authorize(Roles = "admin")]
     public class EditModel : PageModel

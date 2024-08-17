@@ -126,19 +126,19 @@
                             <div class="mySlides">
                                 <div class="numbertext"></div>
                                 <div class="text-slider"><h2>Φηρα/Fira</h2></div>
-                                <a asp-page="Index" asp-route-searchString="Φυρα"><img src="~/images/fira1.jpg" style="height: 410px;width:100%;"></a>
+                                <a asp-page="Index" asp-route-searchString="Φυρα"><img src="~/images/fira1.webp" style="height: 410px;width:100%;"></a>
 
                             </div>
                             <div class="mySlides">
                                 <div class="numbertext">1 / 3</div>
                                 <div class="text-slider"><h2>Φηρα/Fira</h2></div>
-                                <a asp-page="Index" asp-route-searchString="Φυρα"><img src="~/images/fira2.jpg" style="height: 410px;width:100%;"></a>
+                                <a asp-page="Index" asp-route-searchString="Φυρα"><img src="~/images/fira2.webp" style="height: 410px;width:100%;"></a>
 
                             </div>
                             <div class="mySlides">
                                 <div class="numbertext">1 / 3</div>
                                 <div class="text-slider"><h2>Φηρα/Fira</h2></div>
-                                <a asp-page="Index" asp-route-searchString="Φυρα"><img src="~/images/fira3.jpg" style="height: 410px;width:100%;"></a>
+                                <a asp-page="Index" asp-route-searchString="Φυρα"><img src="~/images/fira3.webp" style="height: 410px;width:100%;"></a>
 
                             </div>
 
@@ -161,19 +161,19 @@
                             <div class="mySlides">
                                 <div class="numbertext"></div>
                                 <div class="text-slider"><h2>OIA</h2></div>
-                                <a asp-page="Index" asp-route-searchString="oia"><img src="~/images/oia1.jpg" style="height: 410px;width:100%;"></a>
+                                <a asp-page="Index" asp-route-searchString="oia"><img src="~/images/oia1.webp" style="height: 410px;width:100%;"></a>
 
                             </div>
                             <div class="mySlides">
                                 <div class="numbertext">2 / 3</div>
                                 <div class="text-slider"><h2>OIA</h2></div>
-                                <a asp-page="Index" asp-route-searchString="oia"><img src="~/images/oia2.jpg" style="height: 410px;width:100%;"></a>
+                                <a asp-page="Index" asp-route-searchString="oia"><img src="~/images/oia2.webp" style="height: 410px;width:100%;"></a>
 
                             </div>
                             <div class="mySlides">
                                 <div class="numbertext">3 / 3</div>
                                 <div class="text-slider"><h2>OIA</h2></div>
-                                <a asp-page="Index" asp-route-searchString="oia"><img src="~/images/oia3.jpg" style="height: 410px;width:100%;"></a>
+                                <a asp-page="Index" asp-route-searchString="oia"><img src="~/images/oia3.webp" style="height: 410px;width:100%;"></a>
 
                             </div>
                             @*<div style="margin: 8px; display: inline-block; width:15%;">
@@ -229,7 +229,7 @@
                 @foreach (var photo in Model.PhotoBlobs)
                 {
                     <div class="main-pic-container">
-                        <a asp-page="./PhotoDetails" asp-route-photoUrl="@photo.Url" asp-route-name="@photo.Name">
+                        <a asp-page="./Pictures/Details" asp-route-photoUrl="@photo.Url" asp-route-name="@photo.Name">
                             <div class="main-pic">
                                 <img class="front-image" src="@photo.Url" />
 
@@ -242,7 +242,7 @@
                                      data-layout="button_count">
                                 </div>*@
                             <a class="share-ico" href="">
-                                <img onclick='myShare("@Model.Url/PhotoDetails/@Html.UrlEncoder.Encode(photo.Url.ToString())?name=@photo.Name")' src="~/images/facebook-share-button3.png" />
+                                <img onclick='myShare("@Model.Url/Pictures/Details/@Html.UrlEncoder.Encode(photo.Url.ToString())?name=@photo.Name")' src="~/images/facebook-share-button3.png" />
                             </a>
                             <a class="download-ico" href="@photo.Url" download>
                                 <img src="~/images/download-icon-red.webp" />

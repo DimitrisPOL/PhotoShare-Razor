@@ -1,0 +1,105 @@
+﻿@page
+@using PhotoShare.Views.Shared.Components.AdminMenu
+@model PhotoShare.Pages.PhotographersAdminPage.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+
+<link href="~/css/simple-sidebar.css" rel="stylesheet" />
+<div class="d-flex" id="wrapper">
+
+    <!-- Sidebar -->
+    @await Component.InvokeAsync("AdminMenu", new AdminMenuViewModel(typeof(CreateModel).Namespace))
+
+    <!-- /#sidebar-wrapper -->
+    <!-- Page Content -->
+    <div id="page-content-wrapper">
+
+            @{
+                await Html.RenderPartialAsync("_ToggleMenuPartial");
+            }
+
+        <div class="container-fluid">
+
+            <h1>Index</h1>
+
+            <p>
+                <a asp-area="" asp-page="/PhotographersAdminPage/RegisterPhotographer">Create New</a>
+            </p>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Users[0].Name)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Users[0].PhoneNumber)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Users[0].Email)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Users[0].ProfilePic)
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.Users)
+                    {
+                        string base64;
+                        string imgSrc;
+
+                        bool isEmailConfirmed = item.EmailConfirmed;
+
+
+
+                        if (item.ProfilePic != null)
+                        {
+                            base64 = Convert.ToBase64String(item.ProfilePic);
+                            imgSrc = String.Format("data:image/gif;base64,{0}", base64);
+                        }
+                        else
+                        {
+                            imgSrc = "https://bootdey.com/img/Content/avatar/avatar7.png";
+                        }
+
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Name)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.PhoneNumber)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Email)
+                            </td>
+                            <td>
+                                <img style="width:30px;height:40px;" src="@imgSrc" class="img-radius" alt="User-Profile-Image">
+                            </td>
+                            <td>
+                                @if (item.LockoutEnabled)
+                                {
+                                    <a asp-page-handler="EnableToggle"  asp-route-id="@item.Id">Enable User</a>
+                                }
+                                else
+                                {
+                                    <a asp-page-handler="EnableToggle" asp-route-id="@item.Id">Disable User</a>
+                                }
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+
+</div>
+<!-- /#wrapper -->
+<!-- Bootstrap core JavaScript -->
+<script src="vendor/jquery/jquery.min.js"></script>
+<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>

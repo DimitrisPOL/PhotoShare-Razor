@@ -4,7 +4,6 @@
 @{
 }
 
-}
 <link href="~/css/simple-sidebar.css" rel="stylesheet" />
 <div class="d-flex" id="wrapper">
 
@@ -24,9 +23,52 @@
             <h1>Index</h1>
 
             <p>
-                <a asp-page="Create">Create New</a>
+                <a asp-page="Add">Create New</a>
             </p>
+
+            <form method="post">
+                Photos
+                <div class="form-group">
+                    <label asp-for="LocationId" class="control-label"></label>
+                    <select asp-for="LocationId" asp-items="@Model.Options" class="form-control">
+                        <option value="">Choose a location</option>
+                    </select>
+                    <span asp-validation-for="LocationId" class="text-danger"></span>
+                </div>
+
+                <br />
+                <input type="submit" value="Get Pictures" />
+            </form>
             
         </div>
+
+        @if (Model.PhotoBlobs?.Count > 0)
+        {
+
+            <a asp-page="./Delete" asp-route-id=@Model.LocationId><button class="btn btn-primary" id="menu-toggle">Delet</button></a>
+
+            <div class="d-flex flex-column bd-highlight mb-3" style="background-color: #faebd7;">
+                <div class="p-2 bd-highlight">
+                    @*<div class="images-container">
+                <div class="text-center">
+                <div class="d-flex flex-row bd-highlight mb-3">
+
+                <div class="p-2 bd-highlight">*@
+                    <div class="d-flex align-content-around flex-wrap">
+                        @if (Model.PhotoBlobs != null)
+                            @foreach (var photo in Model.PhotoBlobs)
+                            {
+                                <div class="card" width="33%" height="300" style="overflow:hidden; margin:2px;">
+                                    <img src="@photo.Url" height="200" />
+                                    <div class="container">
+                                        <h4><b>@photo.Name</b></h4>
+                                    </div>
+                                </div>
+
+                            }
+                    </div>
+                </div>
+            </div>
+        }
     </div>
 </div>

@@ -9,6 +9,8 @@ namespace PhotoShare.Domain.Values
     public class Location
     {
         public string? ID { get; set; }
+        [StringLength(20, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
+        [RegularExpression("^[a-zA-Z]{3,20}$", ErrorMessage = "Name must only contain latin characters")]
         public string Name { get; set; }
         public string SearchIndex { get; set; }
         public byte[]? ProfilePic { get; set; }

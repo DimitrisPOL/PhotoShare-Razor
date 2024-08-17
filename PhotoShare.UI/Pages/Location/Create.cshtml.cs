@@ -16,19 +16,19 @@ namespace PhotoShare.Pages.Location
     {
         private readonly ApplicationDbContext _context;
         public List<Domain.Values.Area> Areas;
-        public List<SelectListItem> Cities { get; set; }
+        public List<SelectListItem> Options { get; set; }
         public IBlobStorageManager _blobStorageManager { get; set; }
         [BindProperty]
         public IFormFile Upload { get; set; }
 
         public CreateModel(ApplicationDbContext context, IBlobStorageManager blobStorageManager)
         {
-            
-            Cities = new List<SelectListItem>();
+
+            Options = new List<SelectListItem>();
             _blobStorageManager = blobStorageManager;
             _context = context;
             Areas = _context.Areas.ToList();
-            Areas.ForEach(c => Cities.Add(new SelectListItem(c.Name, c.ID)));
+            Areas.ForEach(c => Options.Add(new SelectListItem(c.Name, c.ID)));
         }
 
         public IActionResult OnGet(string errorMessage = null)

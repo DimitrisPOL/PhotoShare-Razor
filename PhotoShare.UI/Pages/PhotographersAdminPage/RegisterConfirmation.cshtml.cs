@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.WebUtilities;
 using PhotoShare.Infrastructure.Data.Users;
 
 
-namespace PhotoShare.Areas.Identity.Pages.Photgraphers
+namespace PhotoShare.Pages.PhotographersAdminPage
 {
     [AllowAnonymous]
     public class RegisterConfirmationModel : PageModel
@@ -53,7 +53,7 @@ namespace PhotoShare.Areas.Identity.Pages.Photgraphers
                 EmailConfirmationUrl = Url.Page(
                     "/Account/ConfirmEmail",
                     pageHandler: null,
-                    values: new { area = "Identity", userId = userId, code = code, returnUrl = returnUrl },
+                    values: new { area = "Identity", userId, code, returnUrl },
                     protocol: Request.Scheme);
             }
 

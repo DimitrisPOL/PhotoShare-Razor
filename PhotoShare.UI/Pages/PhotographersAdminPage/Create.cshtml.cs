@@ -6,7 +6,7 @@ using PhotoShare.Data;
 using PhotoShare.Domain.Values;
 using PhotoShare.Extensions;
 
-namespace PhotoShare.Pages.PhotographersPage
+namespace PhotoShare.Pages.PhotographersAdminPage
 {
     [Authorize(Roles = "admin")]
     public class CreateModel : PageModel

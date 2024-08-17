@@ -17,14 +17,14 @@ namespace PhotoShare.Pages.Province
     public class CreateModel : PageModel
     {
         private readonly ApplicationDbContext _context;
-        public List<SelectListItem> Countries { get; set; }
+        public List<SelectListItem> Options { get; set; }
 
 
     public CreateModel(ApplicationDbContext context)
         {
-            Countries = new List<SelectListItem>();
+            Options = new List<SelectListItem>();
             _context = context;
-            _context.Countries.ToList().ForEach( c => Countries.Add(new SelectListItem( c.Name, c.ID)));
+            _context.Countries.ToList().ForEach( c => Options.Add(new SelectListItem( c.Name, c.ID)));
         }
 
         public IActionResult OnGet(string errorMessage = null)
