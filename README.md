@@ -1,6 +1,6 @@
 # PhotoShare
 
-PhotoShare is a project that allows the public and private sharing of photographs from photographers to users. It stores pictures using Azure Blob Storage. The pictures are uploaded from profesional photographers that are registered on the website using an admin control panel and they are publically made available via the front page. The front page lazy loads a number of pictures upon visiting. By scrolling the front page new pictures are being appended for the user to see. There is also a photographers page for the user to see the photographers that are registered on the site and are enabled for view by the administrator. 
+PhotoShare is a project that allows the public and private sharing of photographs from photographers to users. It stores pictures using Azure Blob Storage. The pictures are uploaded from profesional photographers that are registered on the website using an admin control panel and they are publically made available via the front page. The front page lazy loads a number of pictures upon visiting. By scrolling the front page new pictures are being appended for the user to see. The pictures are linked to a location and the users may search for pictures attributed to the location using a search box that is enhanced with auto-completion and auto-correction features. There is also a photographers page for the user to see the photographers that are registered on the site and are enabled for view by the administrator. 
 
 ## Prerequisites
 
@@ -8,6 +8,15 @@ PhotoShare is a project that allows the public and private sharing of photograph
 - Visual Studio 2022 or later.
 - [Azure Storage](https://learn.microsoft.com/en-us/azure/storage/common/storage-account-create?tabs=azure-portal) account with [Access key](https://learn.microsoft.com/en-us/azure/storage/common/storage-account-keys-manage?tabs=azure-portal)
 
+## Features
+
+- Store pictures using Azure Blob Storage in an admin control panel.
+- Creating location entities with which the pictures are grouped by. Each location holds each own container in blob storeage. This enables users to search pictures by location.
+- Progressively view published pictures in the front page via an Ajax appending mechanism (new images are fethched and added as user scorll).
+- Auto-completion and auto-correction with suggested searches dynamically as the user types.
+- Register new professional photographers that add new pictures.
+- Display registered professional for the users in 'Our Photographers'. Only the photographers that admin has enabled visibility are shown.
+- JQuery Slideshow that slides pictures every three seconds. Also the user can slide on their own using navigation arrow buttons.
 
 ## Getting Started
 
@@ -56,7 +65,7 @@ PM> Update-Database
   
   ```
 
-##Sample photos
+## Sample photos
 
 ![Screenshot 2024-08-18 at 14-37-41 Home page - Photo](https://github.com/user-attachments/assets/0da43dcb-16f4-4a6f-b0d6-4ce4d037bb32)
 
@@ -69,10 +78,11 @@ PM> Update-Database
 ![Screenshot 2024-08-18 at 14-49-12 Locations - Photo](https://github.com/user-attachments/assets/557786f6-72e5-4f0f-b190-554a47c14f78)
 
 
+![Screenshot 2024-08-18 at 14-50-25 - Photo](https://github.com/user-attachments/assets/13807e0e-85ff-4dac-939e-c44f8a590174)
 
 
+![Screenshot 2024-08-18 at 14-51-00 Register - Photo](https://github.com/user-attachments/assets/fdbe6421-27d5-4f88-b769-4a55db98914c)
 
-
-
+![image](https://github.com/user-attachments/assets/5e8a71a4-a80f-4725-aa60-35866c3cd403)
 
 
