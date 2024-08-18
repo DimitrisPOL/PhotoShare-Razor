@@ -8,7 +8,6 @@ namespace PhotoShare.Infrastructure.Configuration
     public class BlobStorageSettings
     {
         public string Scheme { get; set; }
-        public string AzureHostUrl { get; set; }
         public string AzureSotrageAccountUrl { get; set; }
         public string ConnectionString { get; set; }
     }
