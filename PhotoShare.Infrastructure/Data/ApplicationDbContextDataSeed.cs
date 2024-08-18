@@ -5,12 +5,6 @@ namespace PhotoShare.Infrastructure.Data
 {
     public class ApplicationDbContextDataSeed
     {
-        /// <summary>
-        ///     Seed users and roles in the Identity database.
-        /// </summary>
-        /// <param name="userManager">ASP.NET Core Identity User Manager</param>
-        /// <param name="roleManager">ASP.NET Core Identity Role Manager</param>
-        /// <returns></returns>
         public static async Task SeedAsync(UserManager<PhotographyUser> userManager, RoleManager<IdentityRole> roleManager)
         {
 
@@ -38,8 +32,6 @@ namespace PhotoShare.Infrastructure.Data
                 await roleManager.CreateAsync(photographerRole);
             }
 
-
-            // New admin user
             string adminUserName = "admin@photoshare.com";
 
             PhotographyUser adminUser = await userManager.FindByEmailAsync(adminUserName);

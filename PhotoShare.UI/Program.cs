@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Net.Http.Headers;
 using PhotoShare.Data;
 using PhotoShare.Extensions;
 using PhotoShare.Infrastructure.Configuration;
@@ -28,7 +29,6 @@ namespace PhotoShare
             builder.Services.AddRazorPages();
 
             builder.Services.AddSingleton<IBlobStorageManager, BlobStorageManager>();
-            builder.Services.AddSingleton<IEmaiSender, EmailSender>();
             builder.Services.AddControllersWithViews();
             var app = builder.Build();
 
@@ -45,7 +45,18 @@ namespace PhotoShare
             }
 
             app.UseHttpsRedirection();
-            app.UseStaticFiles();
+            app.UseStaticFiles(
+                 new StaticFileOptions
+                 {
+                     OnPrepareResponse = ctx =>
+                     {
+                         const int durationInSeconds = 60 * 60 * 24;
+                         ctx.Context.Response.Headers[HeaderNames.CacheControl] =
+                             "public,max-age=" + durationInSeconds;
+                     }
+                 }
+
+             );
 
             app.EnsureIdentityDbIsCreated();
             app.SeedIdentityDataAsync();

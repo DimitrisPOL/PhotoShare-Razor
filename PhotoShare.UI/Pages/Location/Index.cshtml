@@ -10,94 +10,94 @@
 <link href="~/css/simple-sidebar.css" rel="stylesheet" />
 <div class="d-flex" id="wrapper">
 
-        @await Component.InvokeAsync("AdminMenu", new AdminMenuViewModel(typeof(CreateModel).Namespace))
+    @await Component.InvokeAsync("AdminMenu", new AdminMenuViewModel(typeof(CreateModel).Namespace))
 
-        <!-- /#sidebar-wrapper -->
-        <!-- Page Content -->
-        <div id="page-content-wrapper">
+    <!-- /#sidebar-wrapper -->
+    <!-- Page Content -->
+    <div id="page-content-wrapper">
 
-            @{
-                await Html.RenderPartialAsync("_ToggleMenuPartial");
-            }
+        @{
+            await Html.RenderPartialAsync("_ToggleMenuPartial");
+        }
 
-            <div class="container-fluid">
+        <div class="container-fluid">
 
-                <h1>Index</h1>
+            <h1>Index</h1>
 
-                <p>
-                    <a asp-page="Create">Create New</a>
-                </p>
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th>
-                                @Html.DisplayNameFor(model => model.Location[0].Name)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.Location[0].ProfilePic)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.Location[0].TelephonePrefix1)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.Location[0].SearchIndex)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.Location[0].NumberOfPictures)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.Location[0].NumberOfPhotographers)
-                            </th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @if (Model.Location != null)
+            <p>
+                <a asp-page="Create">Create New</a>
+            </p>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Location[0].Name)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Location[0].ProfilePic)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Location[0].TelephonePrefix1)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Location[0].SearchIndex)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Location[0].NumberOfPictures)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Location[0].NumberOfPhotographers)
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model.Location != null)
+                    {
+
+                        @foreach (var item in Model.Location)
                         {
+                            string base64;
+                            string imgSrc;
 
-                            @foreach (var item in Model.Location)
+                            if (item.ProfilePic != null)
                             {
-                                string base64;
-                                string imgSrc;
-
-                                if (item.ProfilePic != null)
-                                {
-                                    base64 = Convert.ToBase64String(item.ProfilePic);
-                                    imgSrc = String.Format("data:image/gif;base64,{0}", base64);
-                                }
-                                else
-                                {
-                                    imgSrc = "https://bootdey.com/img/Content/avatar/avatar7.png";
-                                }
-                                <tr>
-                                    <td>
-                                        <a asp-page="./Details" asp-route-id="@item.ID">@Html.DisplayFor(modelItem => item.Name)</a>
-                                    </td>
-                                    <td>
-                                        <img src="@imgSrc" width="150" height="90">
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.TelephonePrefix1)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.SearchIndex)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.NumberOfPictures)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.NumberOfPhotographers)
-                                    </td>
-                                    <td>
-                                        <a asp-page="./Edit" asp-route-id="@item.ID">Edit</a> |
-                                        <a asp-page="./Details" asp-route-id="@item.ID">Details</a> |
-                                        <a asp-page="./Delete" asp-route-id="@item.ID">Delete</a>
-                                    </td>
-                                </tr>
+                                base64 = Convert.ToBase64String(item.ProfilePic);
+                                imgSrc = String.Format("data:image/gif;base64,{0}", base64);
                             }
+                            else
+                            {
+                                imgSrc = "https://bootdey.com/img/Content/avatar/avatar7.png";
+                            }
+                            <tr>
+                                <td>
+                                    <a asp-page="./Details" asp-route-id="@item.ID">@Html.DisplayFor(modelItem => item.Name)</a>
+                                </td>
+                                <td>
+                                    <img src="@imgSrc" width="150" height="90">
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.TelephonePrefix1)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.SearchIndex)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.NumberOfPictures)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.NumberOfPhotographers)
+                                </td>
+                                <td>
+                                    <a asp-page="./Edit" asp-route-id="@item.ID">Edit</a> |
+                                    <a asp-page="./Details" asp-route-id="@item.ID">Details</a> |
+                                    <a asp-page="./Delete" asp-route-id="@item.ID">Delete</a>
+                                </td>
+                            </tr>
                         }
-                    </tbody>
-                </table>
-            </div>
+                    }
+                </tbody>
+            </table>
         </div>
-        </div>
+    </div>
+</div>

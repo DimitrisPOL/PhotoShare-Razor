@@ -57,9 +57,9 @@ namespace PhotoShare.Infrastructure.Services
                 var header = new BlobHttpHeaders();
 
                 if (contentType == ".jpg" || contentType == ".jpeg")
-                    header.ContentType = "image/jpeg";
+                    header.ContentType = "application/octet-stream";
                 else if (contentType == ".png")
-                    header.ContentType = "image/png";
+                    header.ContentType = "application/octet-stream";
 
                 if (header.ContentType != null)
                 {

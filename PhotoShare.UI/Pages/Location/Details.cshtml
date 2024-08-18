@@ -1,4 +1,5 @@
 ﻿@page
+@using PhotoShare.Views.Shared.Components.AdminMenu
 @model PhotoShare.Pages.Location.DetailsModel
 
 @{
@@ -22,95 +23,91 @@
 </style>
 
 
-<h1>Details</h1>
+<link href="~/css/simple-sidebar.css" rel="stylesheet" />
+<div class="d-flex" id="wrapper">
 
-<div>
-    <h4>Location</h4>
-    <hr />
-    <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Location.Name)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Location.Name)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Location.TelephonePrefix1)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Location.TelephonePrefix1)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Location.SearchIndex)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Location.SearchIndex)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Location.NumberOfPictures)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Location.NumberOfPictures)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Location.NumberOfPhotographers)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Location.NumberOfPhotographers)
-        </dd>
-    </dl>
-</div>
-<div>
-    <a asp-page="./Edit" asp-route-id="@Model.Location.ID">Edit</a> |
-    <a asp-page="./Index">Back to List</a>
-</div>
+    @await Component.InvokeAsync("AdminMenu", new AdminMenuViewModel(typeof(PhotoShare.Pages.Location.CreateModel).Namespace))
 
-<form method="post" asp-page="Details" asp-route-id="@Model.Location.ID" enctype="multipart/form-data">
-    Photos <input type="file" name="photos" multiple="multiple" accept="image/*" />
-    <input type="hidden" asp-for="Name" value="@Model.Location.ID">
-    <br />
-    <input type="submit" value="Upload" />
-    @*@if (Model.FileNames != null && Model.FileNames.Count > 0)
-    {
-        <ul>
-            @foreach (var fileName in Model.FileNames)
-            {
+    <div id="page-content-wrapper">
 
-                <li>
+        @{
+            await Html.RenderPartialAsync("_ToggleMenuPartial");
+        }
 
-                    <div class="card">
-                        <img src="~/images/@fileName" style="width:100%" />
-                        <div class="container">
-                            <h4><b>John Doe</b></h4>
-                            <p>Architect & Engineer</p>
+        <div class="row">
+            <div class="col-md-12">
+                <div>
+                    <h4>Location</h4>
+                    <hr />
+                    <dl class="row">
+                        <dt class="col-sm-2">
+                            @Html.DisplayNameFor(model => model.Location.Name)
+                        </dt>
+                        <dd class="col-sm-10">
+                            @Html.DisplayFor(model => model.Location.Name)
+                        </dd>
+                        <dt class="col-sm-2">
+                            @Html.DisplayNameFor(model => model.Location.TelephonePrefix1)
+                        </dt>
+                        <dd class="col-sm-10">
+                            @Html.DisplayFor(model => model.Location.TelephonePrefix1)
+                        </dd>
+                        <dt class="col-sm-2">
+                            @Html.DisplayNameFor(model => model.Location.SearchIndex)
+                        </dt>
+                        <dd class="col-sm-10">
+                            @Html.DisplayFor(model => model.Location.SearchIndex)
+                        </dd>
+                        <dt class="col-sm-2">
+                            @Html.DisplayNameFor(model => model.Location.NumberOfPictures)
+                        </dt>
+                        <dd class="col-sm-10">
+                            @Html.DisplayFor(model => model.Location.NumberOfPictures)
+                        </dd>
+                        <dt class="col-sm-2">
+                            @Html.DisplayNameFor(model => model.Location.NumberOfPhotographers)
+                        </dt>
+                        <dd class="col-sm-10">
+                            @Html.DisplayFor(model => model.Location.NumberOfPhotographers)
+                        </dd>
+                    </dl>
+                </div>
+                <div>
+                    <a asp-page="./Edit" asp-route-id="@Model.Location.ID">Edit</a> |
+                    <a asp-page="./Index">Back to List</a>
+                </div>
+
+                <form method="post" asp-page="Details" asp-route-id="@Model.Location.Name" enctype="multipart/form-data">
+                    Photos <input type="file" name="photos" multiple="multiple" accept="image/*" />
+                    <input type="hidden" asp-for="Name" value="@Model.Location.Name">
+                    <br />
+                    <input type="submit" value="Upload" />
+                </form>
+
+                <div class="d-flex flex-column bd-highlight mb-3" style="background-color: #faebd7;">
+                    <div class="p-2 bd-highlight">
+                        <div class="d-flex align-content-around flex-wrap">
+                            @if (Model.PhotoBlobs != null)
+                                @foreach (var photo in Model.PhotoBlobs)
+                                {
+                                    <div class="card admin-blob-image" width="33%" height="300">
+                                        <img src="@photo.Url" height="200" />
+                                        <div class="container">
+                                            <h4><b>@photo.Name</b></h4>
+                                        </div>
+                                    </div>
+
+                                }
                         </div>
-                    </div>
-                </li>
-            }
-        </ul>
-    }*@
-</form>
-<div class="d-flex flex-column bd-highlight mb-3" style="background-color: #faebd7;">
-    <div class="p-2 bd-highlight">
-        @*<div class="images-container">
-            <div class="text-center">
-                <div class="d-flex flex-row bd-highlight mb-3">
-
-                    <div class="p-2 bd-highlight">*@
-        <div class="d-flex align-content-around flex-wrap">
-           @if(Model.PhotoBlobs != null)
-            @foreach (var photo in Model.PhotoBlobs)
-            {
-                <div class="card" width="33%" height="300" style="overflow:hidden; margin:2px;">
-                    <img src="@photo.Url"  height="200"/>
-                    <div class="container">
-                        <h4><b>@photo.Name</b></h4>
                     </div>
                 </div>
 
-            }
-        </div>
-    </div>
-</div>
 
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
 

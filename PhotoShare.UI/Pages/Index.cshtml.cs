@@ -140,5 +140,11 @@ namespace PhotoShare.Pages
 
             return new JsonResult(locations);
         }
+
+        public ActionResult OnPostDownloadFile(string url)
+        {
+            return File("/DownloadableFiles/TestFile34.csv", "application/octet-stream",
+                        "NewName34.csv");
+        }
     }
 }

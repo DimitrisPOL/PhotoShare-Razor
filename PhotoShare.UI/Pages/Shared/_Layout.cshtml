@@ -12,54 +12,27 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - Photo</title>
-    @*     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> *@
-@* 
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
-    <link href="~/css/slide-show.css" rel="stylesheet" />
-    <link href="~/css/site.css" rel="stylesheet" />
-    <link href="~/css/SearchItem.css" rel="stylesheet" />
-    <link href="~/css/jquery-ui.css" rel="stylesheet" />
-    *@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link href="~/css/slide-show.css" rel="stylesheet" />
     <link href="~/css/site.css" rel="stylesheet" />
     <link href="~/css/jquery-ui.css" rel="stylesheet" />
-    <link href="~/css/SearchItem.css" rel="stylesheet" />
+    <link href="~/css/searchItem.css" rel="stylesheet" />
     <link href="~/css/globals.css" rel="stylesheet" />
-@*     <link href="~/css/front.css" rel="stylesheet" /> *@
 
     <script src="~/js/jquery-1.10.0.min.js"></script>
     <script src="~/js/jquery-ui.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
-@*     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
-
-    <link href="https://ajax.aspnetcdn.com/ajax/jquery.ui/1.10.0/themes/blitzer/jquery-ui.css" /> *@
-
-
-
-@*     <title>@ViewData["Title"] - Photo</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link href="~/css/SearchItem.css" rel="stylesheet" />
-    <link href="~/css/site.css" rel="stylesheet" />
-
-    <link href="~/css/globals.css" rel="stylesheet" />
-    <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
-
-    <script src="~/js/jquery-1.10.0.min.js"></script>
-    <script src="~/js/jquery-ui.min.js"></script> *@
+    <script src="~/js/slideshow.js"></script>
     
 </head>
 <body>
     <header>
 
-        @*<nav class="navbar navbar-expand-lg navbar-toggleable-lg navbar-light bg-white border-bottom box-shadow mb-3" style="background-color: #F0F8FF;">*@
-
         <div class="container-fluid">
             <div class="row">
                 <div class="col-2 col-md-2 col-sm-2">
                     <a class="navbar-brand" asp-area="" asp-page="/Index">
-                        <img style="max-width:100%;" src="~/images/logo.png" height="90" width="220" />
+                        <img src="~/images/logo.png" height="90" width="220" />
                     </a>
                 </div>
 
@@ -77,9 +50,7 @@
                             <li>
                                 <a class="nav-link text-dark" asp-area="" asp-page="/Contact">Contacts</a>
                             </li>
-
                         </ul>
-
                     </div>
                     <div class="dropdown">
 
@@ -91,51 +62,18 @@
                         </div>
                     </div>
                 </div>
-
-
                 <div class="col-2 col-md-1 col-sm-1 extra-image">
                     <a asp-area="" asp-page="/Index">
-                        <img src="~/images/logo.png" height="90" width="220" />
+                        <img src="~/images/second-logo.png" height="90" width="220" />
                     </a>
                 </div>
             </div>
         </div>
 
-
-
-        @*</nav>*@
     </header>
-    <partial name="_CookieConsentPartial" />
     <main role="main" class="pb-3">
         @RenderBody()
     </main>
-
-
-    @*<footer class="border-top footer text-muted">
-    <div class="container">
-    &copy; 2021 - Photo - <a asp-area="" asp-page="/Privacy">Privacy</a>
-    </div>
-    </footer>*@
-
-
-
-
-
-@*     <script src="~/lib/jquery/dist/jquery.min.js"></script> *@
-@*     <script src="~/lib/jquery/dist/jquery.js"></script> *@
-
-
-
-@*     <script src="~/js/jquery-ui.min.js"></script> *@
-@*     <script src="~/js/jquery-ui.min-1.12.0-rc.2.js"></script> *@
-
-@*     <script src="~/lib/jquery/dist/jquery.min.map"></script> *@
-@*     <script src="~/js/jquery-1.10.0.js"></script> *@
-
-
- @*    <script src="~/js/mini-jquery-ui.js"></script> *@
-
-
 
     @RenderSection("Scripts", required: false)
 </body>

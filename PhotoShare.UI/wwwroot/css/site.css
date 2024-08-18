@@ -66,6 +66,15 @@ body {
     margin: 2px
 }
 
+.slide-image {
+    height: 410px;
+    width: 100%;
+}
+.admin-blob-image {
+    overflow: hidden;
+    margin: 2px;
+}
+
 .main-pic-container {
     width: 33%;
     height: 300px;
