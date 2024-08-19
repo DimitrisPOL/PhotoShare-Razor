@@ -113,9 +113,6 @@
                             </div>
                         </a>
                         <div class="main-pic-menu">
-                            <a class="share-ico" href="">
-                                <img onclick='myShare("@Model.Url/Pictures/Details/@Html.UrlEncoder.Encode(photo.Url.ToString())?name=@photo.Name")' src="~/images/facebook-share-button3.png" />
-                            </a>
                             <a onclick="return createTimedLink(this, myFunction, 2000);" class="download-ico" href="@photo.Url" download="@photo.Name">
                                 <img src="~/images/download-icon-red.webp" />
                             </a>
