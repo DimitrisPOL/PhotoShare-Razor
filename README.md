@@ -10,7 +10,7 @@ PhotoShare is a project that facilitates both public and private sharing of phot
 
 ## Features
 
-- Store pictures using Azure Blob Storage in an admin control panel.
+- Store pictures using [Azure Blob Storage](https://learn.microsoft.com/en-us/azure/storage/blobs/storage-blobs-introduction) in an admin control panel.
 - Create location entities that group the pictures. Each location has its own container in blob storage, allowing users to search for pictures by location.
 - Progressively view published pictures on the front page through an AJAX appending mechanism (new images are fetched and added as the user scrolls).
 - Auto-completion and auto-correction with suggested searches that dynamically appear as the user types.
