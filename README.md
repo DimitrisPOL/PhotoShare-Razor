@@ -1,6 +1,6 @@
 # PhotoShare
 
-PhotoShare is a project that allows the public and private sharing of photographs from photographers to users. It stores pictures using Azure Blob Storage. The pictures are uploaded from profesional photographers that are registered on the website using an admin control panel and they are publically made available via the front page. The front page lazy loads a number of pictures upon visiting. By scrolling the front page new pictures are being appended for the user to see. The pictures are linked to a location and the users may search for pictures attributed to the location using a search box that is enhanced with auto-completion and auto-correction features. There is also a photographers page for the user to see the photographers that are registered on the site and are enabled for view by the administrator. 
+PhotoShare is a project that facilitates both public and private sharing of photographs from photographers to users. It stores images using Azure Blob Storage. Professional photographers, registered on the website, upload pictures through an admin control panel, making them publicly available on the front page. The front page implements lazy loading, initially displaying a limited number of pictures when visited. As the user scrolls, more images are progressively appended for viewing. Each picture is linked to a location, and users can search for images associated with a specific location through a search box enhanced with auto-completion and auto-correction features. Additionally, there is a photographers page where users can view photographers registered on the site and approved for visibility by the administrator.
 
 ## Prerequisites
 
@@ -11,12 +11,16 @@ PhotoShare is a project that allows the public and private sharing of photograph
 ## Features
 
 - Store pictures using Azure Blob Storage in an admin control panel.
-- Creating location entities with which the pictures are grouped by. Each location holds each own container in blob storeage. This enables users to search pictures by location.
-- Progressively view published pictures in the front page via an Ajax appending mechanism (new images are fethched and added as user scorll).
-- Auto-completion and auto-correction with suggested searches dynamically as the user types.
-- Register new professional photographers that add new pictures.
-- Display registered professional for the users in 'Our Photographers'. Only the photographers that admin has enabled visibility are shown.
-- JQuery Slideshow that slides pictures every three seconds. Also the user can slide on their own using navigation arrow buttons.
+- Create location entities that group the pictures. Each location has its own container in blob storage, allowing users to search for pictures by location.
+- Progressively view published pictures on the front page through an AJAX appending mechanism (new images are fetched and added as the user scrolls).
+- Auto-completion and auto-correction with suggested searches that dynamically appear as the user types.
+- Register new professional photographers who can add new pictures.
+- Display registered professionals for users on the "Our Photographers" page. Only photographers whose visibility has been enabled by the admin are shown.
+- JQuery slideshow that automatically transitions between pictures every three seconds. Users can also manually navigate using arrow buttons.
+
+## Future Features
+
+-  Private sharing of pictures from photographer to simple user
 
 ## Getting Started
 
@@ -29,18 +33,18 @@ cd PhotoShare
 ```
 
 ## Setting Up the Project
-- Install Required Packages
-- Configure Database
-  -  Set you DBs connection string in appsettings.json
+1.  Install Required Packages
+2.  Configure Database
+  -  Set you database  connection string in 'appsettings.json'
 ```bash
   "ConnectionStrings": {
     "DefaultConnection": "Server=*********L2;Database=PhotoShare;Trusted_Connection=True;TrustServerCertificate=True;MultipleActiveResultSets=true"
   }
 
 ```
-  -  From Nuget Package Manager Consele choose Photoshare.Infrastructure project and enable migrations and update database
-
-```bash
+3. Enable Migrations and Update the Database
+  -  From the NuGet Package Manager Console, choose the PhotoShare.Infrastructure project and run the following commands:
+ ```bash
 PM> Enable-Migrations
 
 PM> Update-Database
@@ -49,13 +53,10 @@ PM> Update-Database
 
 ![image](https://github.com/user-attachments/assets/a56cd814-989f-4b85-8747-314578fb3186)
 
-  - Create an [Azure Storage](https://learn.microsoft.com/en-us/azure/storage/common/storage-account-create?tabs=azure-portal) and enbale an  [Access key](https://learn.microsoft.com/en-us/azure/storage/common/storage-account-keys-manage?tabs=azure-portal)
-  - In Azure Portal Panel navigate to Storage Accounts > {Storage you created} > Access Keys
-  -  Fill the appropriate data on appsettings.json . Fill the name of the storage account in AzureSotrageAccountUrl ending in .blob.core.windows.net and in ConnectionString. Fill in the AccountKey. 
-> [!CAUTION]
-> Never share this key or have it exposed in a repository. Someone abusing this key could result in Microsoft charging your account.
-
- ```bash
+4.  Create an [Azure Storage](https://learn.microsoft.com/en-us/azure/storage/common/storage-account-create?tabs=azure-portal) Account and enable an [Access key](https://learn.microsoft.com/en-us/azure/storage/common/storage-account-keys-manage?tabs=azure-portal)
+  -  In the Azure Portal, navigate to: Storage Accounts > [Your Storage Account] > Access Keys
+  -  Enter the appropriate details in appsettings.json. Provide the storage account name in AzureStorageAccountUrl, ending in .blob.core.windows.net, and add the ConnectionString and AccountKey.
+```bash
       "BlobStorageSettings": {
         "ConnectionString": "DefaultEndpointsProtocol=https;AccountName=*************;AccountKey=***********************;EndpointSuffix=core.windows.net",
         "AzureSotrageAccountUrl": "*********.blob.core.windows.net",
@@ -63,7 +64,11 @@ PM> Update-Database
         "Scheme": "https"
       }
   
-  ```
+```
+> [!CAUTION]
+> Never share this key or have it exposed in a repository. Someone abusing this key could result in Microsoft charging your account.
+
+
 
 ## Sample photos
 
