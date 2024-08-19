@@ -27,8 +27,8 @@ PhotoShare is a project that facilitates both public and private sharing of phot
 ### Clone the Repository
 
 ```bash
-git clone https://github.com/DimitrisPOL/PhotoShare-Razo.git
-cd PhotoShare-Razo
+git clone https://github.com/DimitrisPOL/PhotoShare-Razor.git
+cd PhotoShare-Razor
 
 ```
 
