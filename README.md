@@ -1,6 +1,6 @@
 # PhotoShare
 
-PhotoShare is a project that facilitates both public and private sharing of photographs from photographers to users. It stores images using Azure Blob Storage. Professional photographers, registered on the website, upload pictures through an admin control panel, making them publicly available on the front page. The front page implements lazy loading, initially displaying a limited number of pictures when visited. As the user scrolls, more images are progressively appended for viewing. Each picture is linked to a location, and users can search for images associated with a specific location through a search box enhanced with auto-completion and auto-correction features. Additionally, there is a photographers page where users can view photographers registered on the site and approved for visibility by the administrator.
+PhotoShare is a project that facilitates both public and private sharing of photographs from photographers to users. It stores images using [Azure Blob Storage](https://learn.microsoft.com/en-us/azure/storage/blobs/storage-blobs-introduction). Professional photographers, registered on the website, upload pictures through an admin control panel, making them publicly available on the front page. The front page implements lazy loading, initially displaying a limited number of pictures when visited. As the user scrolls, more images are progressively appended for viewing. Each picture is linked to a location, and users can search for images associated with a specific location through a search box enhanced with auto-completion and auto-correction features. Additionally, there is a photographers page where users can view photographers registered on the site and approved for visibility by the administrator.
 
 ## Prerequisites
 
@@ -27,8 +27,8 @@ PhotoShare is a project that facilitates both public and private sharing of phot
 ### Clone the Repository
 
 ```bash
-git clone https://github.com/DimitrisPOL/PhotoShare.git
-cd PhotoShare
+git clone https://github.com/DimitrisPOL/PhotoShare-Razo.git
+cd PhotoShare-Razo
 
 ```
 
